@@ -6,6 +6,7 @@ import home from '../imports/ui/components/home/home';
 import login from '../imports/ui/components/login/login';
 import nav from '../imports/ui/components/navigation/nav';
 import log from '../imports/ui/components/log/log';
+import question from '../imports/ui/components/question/question';
 
 
 angular.module('mDef', [
@@ -14,7 +15,8 @@ angular.module('mDef', [
     home.name,
     login.name,
     nav.name,
-    log.name
+    log.name,
+    question.name
 ]).config(config).run(run);
 
 function config($locationProvider, $urlRouterProvider) {
