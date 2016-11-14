@@ -2,12 +2,10 @@ import templateUrl from './nav.html';
 
 class Nav {
     constructor($scope) {
-        (function($){
-            $(function(){
 
+        (function ($) {
+            $(function () {
                 $('.button-collapse').sideNav();
-                $('.parallax').parallax();
-
             }); // end of document ready
         })(jQuery); // end of jQuery name space
     }
@@ -15,6 +13,7 @@ class Nav {
 
 // create a module
 export default angular.module('nav', [
+    'accounts.ui'
 ])
     .component('navigation', {
         templateUrl,

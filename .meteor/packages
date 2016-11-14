@@ -22,3 +22,5 @@ insecure                # Allow all DB writes from clients (for prototyping)
 angular-templates
 fourseven:scss
 materialize:materialize
+accounts-password@1.2.12
+dotansimha:accounts-ui-angular

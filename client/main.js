@@ -5,6 +5,7 @@ import uiRouter from 'angular-ui-router';
 import home from '../imports/ui/components/home/home';
 import login from '../imports/ui/components/login/login';
 import nav from '../imports/ui/components/navigation/nav';
+import log from '../imports/ui/components/log/log';
 
 
 angular.module('mDef', [
@@ -12,12 +13,24 @@ angular.module('mDef', [
     uiRouter,
     home.name,
     login.name,
-    nav.name
-]).config(config);
+    nav.name,
+    log.name
+]).config(config).run(run);
 
 function config($locationProvider, $urlRouterProvider) {
 
     $locationProvider.html5Mode(true);
 
     $urlRouterProvider.otherwise('/');
+}
+
+function run($rootScope, $state) {
+
+    $rootScope.$on('$stateChangeError',
+        (event, toState, toParams, fromState, fromParams, error) => {
+            if (error === 'AUTH_REQUIRED') {
+                $state.go('home');
+            }
+        }
+    );
 }

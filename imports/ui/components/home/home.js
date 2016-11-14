@@ -1,16 +1,28 @@
-import {Steps} from '../../../api/steps.js';
-
+import {Meteor} from 'meteor/meteor';
 import templateUrl from './home.html';
+import {Steps} from '../../../api/steps/index.js';
 
 class Home {
     constructor($scope) {
         $scope.viewModel(this);
-
+        (function ($) {
+            $(function () {
+                $('.parallax').parallax();
+            }); // end of document ready
+        })(jQuery); // end of jQuery name space
         this.helpers({
             steps() {
-                return Steps.find({});
+                return Steps.find({},{
+                    sort: {
+                        date: -1
+                    }
+                });
             }
         });
+        $scope.authenticated = Meteor.userId() !== null;
+    }
+    removeLog(log) {
+        Steps.remove(log._id);
     }
 }
 

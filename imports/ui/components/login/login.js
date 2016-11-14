@@ -9,6 +9,7 @@ class Login {
 
 // create a module
 export default angular.module('login', [
+
 ])
     .component('login', {
         templateUrl,
