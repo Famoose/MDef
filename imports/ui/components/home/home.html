@@ -20,7 +20,7 @@
     <div class="section">
         <ul class="collection with-header">
             <li class="collection-header"><h4>Logs</h4></li>
-            <li  class="collection-item" ng-repeat="step in $ctrl.steps">{{step.strength}} - {{step.date}}
+            <li  class="collection-item" ng-repeat="step in $ctrl.steps">{{step.strength}} - {{step.date | date : "dd.MM.yyyy"}}
                 <button class="btn-flat waves-light" ng-click="$ctrl.removeLog(step)">Delete</button>
             </li>
         </ul>

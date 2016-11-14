@@ -15,11 +15,10 @@ class Log {
     }
 
     addLog(log) {
-        var owner = Meteor.userId();
         Steps.insert({
             strength: log,
             date: new Date,
-            owner: owner
+            owner: Meteor.userId()
 
         // }, (error) => {
         //     if (error) {
