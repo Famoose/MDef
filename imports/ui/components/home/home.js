@@ -10,6 +10,9 @@ class Home {
                 $('.parallax').parallax();
             }); // end of document ready
         })(jQuery); // end of jQuery name space
+
+        this.subscribe('steps');
+
         this.helpers({
             steps() {
                 return Steps.find({},{
@@ -19,7 +22,6 @@ class Home {
                 });
             }
         });
-        $scope.authenticated = Meteor.userId() !== null;
     }
     removeLog(log) {
         Steps.remove(log._id);
