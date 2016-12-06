@@ -1,48 +1,52 @@
 import {Meteor} from 'meteor/meteor';
 
-import templateUrl from './home.html';
-import {Steps} from '../../../api/steps/index.js';
+import templateUrl from './admin.html';
+import {Categories} from '../../../api/categories/index.js';
 
-class Home {
+class Admin {
     constructor($scope) {
         $scope.viewModel(this);
-        (function ($) {
-            $(function () {
-                $('.parallax').parallax();
-            }); // end of document ready
-        })(jQuery); // end of jQuery name space
 
-        this.subscribe('steps');
+        this.subscribe('categories');
 
         this.helpers({
-            steps() {
-                return Steps.find({},{
+            categories() {
+                return Categories.find({}, {
                     sort: {
-                        date: -1
+                        category: 1
                     }
                 });
             }
         });
     }
-    removeLog(log) {
-        Steps.remove(log._id);
+
+    update(category)
+    {
+        Categories.update({"_id":category._id},{$set:{"category":category.category}});
+    }
+    remove(category) {
+        Categories.remove(category._id);
+    }
+    add(category) {
+        Categories.insert(category);
     }
 }
-const name = 'home';
+const name = 'admin';
+
 // create a module
 export default angular.module(name, [
 ])
     .component(name, {
         templateUrl,
-        controller: ['$scope',Home]
+        controller: ['$scope', Admin]
     })
     .config(['$stateProvider', config]);
 
 function config($stateProvider) {
     $stateProvider
-        .state('home', {
-            url: '/home',
-            template: '<home></home>',
+        .state('admin', {
+            url: '/admin',
+            template: '<admin></admin>',
             resolve: {
                 error: ['$q', function currentUser($q) {
                     if (Meteor.userId() === null) {

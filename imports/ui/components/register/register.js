@@ -1,16 +1,13 @@
 import {Meteor} from 'meteor/meteor';
-import angular from 'angular';
-import templateUrl from './login.html';
+import templateUrl from './register.html';
 
 
+class Register {
 
-class Login {
     constructor($scope, $state) {
         $scope.viewModel(this);
         this.$state = $state;
-        $(function () {
-            $.backstretch("images/background-login.jpg");
-        });
+
         this.credentials = {
             email: '',
             password: ''
@@ -19,8 +16,8 @@ class Login {
         this.error = '';
     }
 
-    login() {
-        Meteor.loginWithPassword(this.credentials.email, this.credentials.password,
+    register() {
+        Accounts.createUser(this.credentials,
             this.$bindToContext((err) => {
                 if (err) {
                     this.error = err;
@@ -32,21 +29,21 @@ class Login {
         );
     }
 }
-const name = 'login';
+const name = 'register';
 // create a module
 export default angular.module(name, [
 ])
     .component(name, {
         templateUrl,
-        controller: ['$scope', '$state', Login]
+        controller: ['$scope', '$state', Register]
     })
     .config(['$stateProvider', config]);
 
 function config($stateProvider) {
     $stateProvider
-        .state('login', {
-            url: '/login',
-            template: '<login></login>',
+        .state('register', {
+            url: '/register',
+            template: '<register></register>',
             resolve: {
                 error: ['$q', function currentUser($q) {
                     if (Meteor.userId()!== null) {

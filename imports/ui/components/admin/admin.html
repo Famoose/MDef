@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="section">
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>Fragebögen</h4></li>
+            <li  class="collection-item" ng-repeat="category in $ctrl.categories">
+                <div class="row">
+                    <div class="input-field col s8">
+                        <input placeholder="Fragebogen" ng-model="category.category" ng-blur="$ctrl.update(category)">
+                    </div>
+                    <button class="btn btn-large col s2" ng-click="$ctrl.remove(category)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="section">
+        <div class="card">
+            <div class="card-content">
+                <h4>Erstellen</h4>
+                <div class="input-field row">
+                    <input class="" placeholder="Fragebogen" ng-model="newCategory">
+                </div>
+                <div class="row">
+                    <button class="btn" ng-click="$ctrl.add({category: newCategory});">
+                        Erstellen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

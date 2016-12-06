@@ -1,15 +1,7 @@
-/* CSS declarations go here */
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
 
 nav ul a,
 nav .brand-logo {
-    color: #444;
+    color: white;
 }
 
 p {
@@ -17,7 +9,7 @@ p {
 }
 
 .button-collapse {
-    color: #26a69a;
+    color: white;
 }
 
 .parallax-container {
@@ -66,3 +58,75 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+nav{
+    background-color: #333;
+}
+.login-container{
+    margin-top: 15%;
+}
+@media only screen and (max-width : 600px) {
+    .login-container{
+        margin-top: 25%;
+    }
+}
+.btn-large{
+    background-color: #333333;
+    font-weight: bold;
+    color: white;
+    font-size: 1.5em;
+}
+.btn-large:hover{
+    background-color: #888;
+}
+.btn-large:focus{
+    background-color: #333333 !important;
+}
+.btn-flat{
+    font-weight: bold;
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+}
+.input-login{
+    background-color: rgba(0,0,0,0.2) !important;
+    border-radius: 2px !important;
+    font-weight: bold;
+    color: white !important;
+    font-size: 1.5em !important;
+}
+.input-login:focus{
+    border-bottom: 1px solid white !important;
+    -webkit-box-shadow: 0 1px 0 0 white !important;
+    -moz-box-shadow: 0 1px 0 0 white !important;
+    box-shadow: 0 1px 0 0 white !important;
+}
+
+#slider {
+    margin-top:50px;
+    width: 100%;
+    border: none;
+}
+
+.noUi-handle{
+    width:40px!important;
+    left:50%!important;
+    border-radius: 20px!important;
+    margin-left: -20px!important;
+}
+.noUi-handle:before, .noUi-handle:after{
+    width: 30px!important;
+    left: 50%!important;
+    margin-left: -15px!important;
+}
+.noUi-origin{
+    width:100%!important;
+}
+.noUi-base
+{
+    background-color: #1e5293;
+}
+.noUi-connect{
+    background-color: #FAFAFA!important;
+}
+

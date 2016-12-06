@@ -1,41 +1,11 @@
-<div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-        <div class="container">
-            <br><br>
-            <h1 class="header center teal-text text-lighten-2">Log your Headache</h1>
-            <div class="row center">
-                <h5 class="header col s12 light">go for the digital way</h5>
-            </div>
-            <div class="row center">
-                <a ui-sref="log" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Log</a>
-            </div>
-            <br><br>
-
-        </div>
-    </div>
-    <div class="parallax"><img src="images/background1.jpg" alt="Unsplashed background img 1"></div>
-</div>
-
 <div class="container">
     <div class="section">
         <ul class="collection with-header">
-            <li class="collection-header"><h4>Logs</h4></li>
+            <li class="collection-header"><h4 ui-sref="log">Logs</h4></li>
             <li  class="collection-item" ng-repeat="step in $ctrl.steps">{{step.strength}} - {{step.date | date : "dd.MM.yyyy"}}
                 <button class="btn-flat waves-light" ng-click="$ctrl.removeLog(step)">Delete</button>
             </li>
         </ul>
 
     </div>
-</div>
-
-
-<div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-        <div class="container">
-            <div class="row center">
-                <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-            </div>
-        </div>
-    </div>
-    <div class="parallax"><img src="images/background3.jpg" alt="Unsplashed background img 3"></div>
 </div>
