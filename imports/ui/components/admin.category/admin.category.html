@@ -5,8 +5,11 @@
             <li  class="collection-item" ng-repeat="category in $ctrl.categories">
                 <div class="row">
                     <div class="input-field col s8">
-                        <input placeholder="Fragebogen" ng-model="category.category" ng-blur="$ctrl.update(category)">
+                        <input placeholder="Fragebogen" ng-model="category.category" ng-change="$ctrl.update(category)">
                     </div>
+                    <button class="btn btn-large col s2" ng-click="$ctrl.view(category)">
+                        <i class="material-icons">search</i>
+                    </button>
                     <button class="btn btn-large col s2" ng-click="$ctrl.remove(category)">
                         <i class="material-icons">delete</i>
                     </button>

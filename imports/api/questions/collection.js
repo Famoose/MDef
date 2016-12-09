@@ -15,22 +15,21 @@ var QuestionsSchema = new SimpleSchema({
         min:0
     },
     categoryId:{
-        type: Number,
+        type: String,
         label: "Fragekataloge",
-        min:0
     }
 });
 
 Questions.attachSchema(QuestionsSchema);
 
-/*Questions.allow({
-    /*insert(userId, step) {
-        return userId === userId;
+Questions.allow({
+    insert(userId, question) {
+        return true;
     },
     update(userId, step, fields, modifier) {
-        return userId && step.owner === userId;
+        return true;
     },
     remove(userId, step) {
-        return userId && step.owner === userId;
+        return true;
     }
-});*/
+});

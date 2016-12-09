@@ -10,7 +10,8 @@ import log from '../imports/ui/components/log/log';
 import question from '../imports/ui/components/question/question';
 import profile from '../imports/ui/components/profile/profile';
 import register from '../imports/ui/components/register/register';
-import admin from '../imports/ui/components/admin/admin'
+import adminCategory from '../imports/ui/components/admin.category/admin.category';
+import adminQuestion from '../imports/ui/components/admin.question/admin.question';
 
 angular.module('pfinder', [
     angularMeteor,
@@ -22,7 +23,8 @@ angular.module('pfinder', [
     question.name,
     profile.name,
     register.name,
-    admin.name
+    adminCategory.name,
+    adminQuestion.name
 ]).config(['$locationProvider', '$urlRouterProvider',config]).run(['$rootScope', '$state',run]);
 
 function onReady() {

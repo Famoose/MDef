@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import '../imports/api/steps/index';
-import '../imports/api/categories/index'
+import '../imports/api/categories/index';
+import '../imports/api/questions/index';
 // import '../imports/api/questions/index.js';
 // import { Characteristics } from '../imports/api/characteristics/index.js';
 

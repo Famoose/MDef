@@ -1,14 +1,14 @@
 import {Meteor} from 'meteor/meteor';
 
-import templateUrl from './admin.html';
+import templateUrl from './admin.category.html';
 import {Categories} from '../../../api/categories/index.js';
 
-class Admin {
-    constructor($scope) {
+class AdminCategory {
+    constructor($scope,$state) {
         $scope.viewModel(this);
 
         this.subscribe('categories');
-
+        this.$state = $state;
         this.helpers({
             categories() {
                 return Categories.find({}, {
@@ -30,23 +30,26 @@ class Admin {
     add(category) {
         Categories.insert(category);
     }
+    view(category){
+        this.$state.go('admin-question',{catId:category._id});
+    }
 }
-const name = 'admin';
+const name = 'adminCategory';
 
 // create a module
 export default angular.module(name, [
 ])
     .component(name, {
         templateUrl,
-        controller: ['$scope', Admin]
+        controller: ['$scope','$state', AdminCategory]
     })
     .config(['$stateProvider', config]);
 
 function config($stateProvider) {
     $stateProvider
-        .state('admin', {
-            url: '/admin',
-            template: '<admin></admin>',
+        .state('admin-category', {
+            url: '/admin/category',
+            template: '<admin-category></admin-category>',
             resolve: {
                 error: ['$q', function currentUser($q) {
                     if (Meteor.userId() === null) {
