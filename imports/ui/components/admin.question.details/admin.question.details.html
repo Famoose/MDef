@@ -7,11 +7,11 @@
                     <div class="input-field col s12">
                         <input placeholder="Frage" ng-model="question.question" ng-blur="$ctrl.update(question)">
                     </div>
-                    <div class="input-field col s8">
+                    <div class="input-field col s10">
                         <input placeholder="Frage-Position" ng-model="question.questionIndex" ng-blur="$ctrl.updateIndex(question)">
                     </div>
                     <button class="btn btn-large col s2" ng-click="$ctrl.view(question)">
-                        <i class="material-icons">search</i>
+                        <i class="material-icons">delete</i>
                     </button>
                     <button class="btn btn-large col s2" ng-click="$ctrl.remove(question)">
                         <i class="material-icons">delete</i>
@@ -19,23 +19,5 @@
                 </div>
             </li>
         </ul>
-    </div>
-    <div class="section">
-        <div class="card">
-            <div class="card-content">
-                <h4>Erstellen</h4>
-                <div class="input-field row">
-                    <input class="" placeholder="Frage" ng-model="newQuestion">
-                </div>
-                <div class="input-field row">
-                    <input class="" placeholder="Frageposition" ng-model="newQuestionIndex">
-                </div>
-                <div class="row">
-                    <button class="btn" ng-click="$ctrl.add({question: newQuestion,questionIndex:newQuestionIndex});">
-                        Erstellen
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

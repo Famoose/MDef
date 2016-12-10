@@ -1,5 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Characteristics} from '../../../api/characteristics/index.js';
+import {Categories} from '../../../api/categories/index.js';
 import Chart from "chart.js";
 import templateUrl from './profile.html';
 
@@ -8,9 +9,6 @@ class Profile {
         $scope.viewModel(this);
 
         var self=this;
-        Meteor.subscribe('characteristics', function(){
-            self.generateRadar();
-        });
 
         this.helpers({
             characteristics() {
@@ -19,7 +17,19 @@ class Profile {
                         characteristic: 1
                     }
                 });
+            },
+            categories(){
+                return Categories.find({},{
+                    sort:{
+                        category:1
+                    }
+                })
             }
+        });
+
+        Meteor.subscribe('categories');
+        Meteor.subscribe('characteristics', function(){
+            self.generateRadar();
         });
 
     }
@@ -33,6 +43,7 @@ class Profile {
         }
         (function ($) {
             $(function () {
+                Chart.defaults.global.legend.display = false;
                 Chart.defaults.global.defaultFontSize=16;
                 var ctx = $("#chart");
                 var chart=new Chart(ctx,{

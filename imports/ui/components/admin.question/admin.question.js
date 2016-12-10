@@ -22,7 +22,7 @@ class AdminQuestion {
 
     update(question)
     {
-        Questions.update({"_id":question._id},{$set:{"question":question.question}});
+        Questions.update({"_id":question._id},question);
     }
     updateIndex(question)
     {
@@ -38,6 +38,10 @@ class AdminQuestion {
         question.categoryId=this.$state.params.catId;
         Questions.insert(question);
         this.sort();
+    }
+    view(question)
+    {
+        this.$state.go("admin-question-details",{questionId:question._id})
     }
     sort()
     {

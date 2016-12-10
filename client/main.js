@@ -11,6 +11,7 @@ import register from '../imports/ui/components/register/register';
 import adminCharacteristic from '../imports/ui/components/admin.characteristic/admin.characteristic';
 import adminCategory from '../imports/ui/components/admin.category/admin.category';
 import adminQuestion from '../imports/ui/components/admin.question/admin.question';
+import adminQuestionDetails from '../imports/ui/components/admin.question.details/admin.question.details';
 
 angular.module('pfinder', [
     angularMeteor,
@@ -22,7 +23,8 @@ angular.module('pfinder', [
     register.name,
     adminCharacteristic.name,
     adminCategory.name,
-    adminQuestion.name
+    adminQuestion.name,
+    adminQuestionDetails.name
 ]).config(['$locationProvider', '$urlRouterProvider',config]).run(['$rootScope', '$state',run]);
 
 function onReady() {
@@ -52,7 +54,7 @@ function run($rootScope, $state) {
                 $state.go('login');
             }
             if(error === 'LOGGED_IN'){
-                $state.go('home');
+                $state.go('profile');
             }
         }
     );
