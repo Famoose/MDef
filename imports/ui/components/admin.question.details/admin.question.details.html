@@ -1,14 +1,16 @@
 <div class="container">
     <div class="section">
         <ul class="collection with-header">
-            <li class="collection-header"><h4>Fragen - Charakteristik</h4></li>
+            <li class="collection-header"><h4>Fragen - Charakteristik</h4>
+                <button class="btn btn-large right" ng-click="$ctrl.back()"><i class="material-icons">keyboard_return</i></button>
+            </li>
             <li  class="collection-item"  ng-repeat="questionsCharacteristic in $ctrl.questionsCharacteristics">
                 <div class="row">
                     <div class="col m4 s12">
                         {{$ctrl.getCharacteristic(questionsCharacteristic.characteristicId)}}
                     </div>
-                    <div class="col m8 s12">
-                        <input ng-model="questionsCharacteristic.influence" ng-blur="$ctrl.updateInfluenceValue(questionsCharacteristic);">
+                    <div class="col m8 s12 ">
+                        <input ng-model="questionsCharacteristic.influence" class="input-normal" ng-blur="$ctrl.updateInfluenceValue(questionsCharacteristic);">
                     </div>
                 </div>
             </li>
