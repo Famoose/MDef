@@ -2,12 +2,17 @@ import {Meteor} from 'meteor/meteor';
 
 import templateUrl from './admin.question.html';
 import {Questions} from '../../../api/questions/index.js';
+import {Characteristics} from '../../../api/characteristics/index.js';
+import {QuestionsCharacteristics} from "../../../api/questions-characteristcs/index.js";
 
 class AdminQuestion {
     constructor($scope,$state) {
         $scope.viewModel(this);
 
         this.subscribe('questions');
+        this.subscribe('characteristics');
+        this.subscribe('questionsCharacteristics');
+
         this.$state=$state;
         this.helpers({
             questions() {
@@ -16,6 +21,13 @@ class AdminQuestion {
                         questionIndex: 1
                     }
                 });
+            },
+            characteristics(){
+                return Characteristics.find({},{
+                    sort:{
+                        characteristic:1
+                    }
+                })
             }
         });
     }
@@ -26,7 +38,8 @@ class AdminQuestion {
     }
     updateIndex(question)
     {
-        Questions.update({"_id":question._id},{$set:{"questionIndex":question.questionIndex}})
+
+        Questions.update({"_id":question._id},{$set:{"questionIndex":question.questionIndex}});
         this.sort();
     }
     remove(question) {
@@ -36,7 +49,14 @@ class AdminQuestion {
     }
     add(question) {
         question.categoryId=this.$state.params.catId;
-        Questions.insert(question);
+
+        var questionId= Questions.insert(question);
+
+        for(var i=0; i<this.characteristics.length; i++)
+        {
+            var characteristicId=this.characteristics[i]._id;
+            QuestionsCharacteristics.insert({characteristicId: characteristicId, questionId: questionId, influence: 0});
+        }
         this.sort();
     }
     view(question)
