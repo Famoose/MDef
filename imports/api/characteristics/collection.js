@@ -3,7 +3,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 export const Characteristics = new Mongo.Collection('characteristics');
 
 var CharacteristicsSchema = new SimpleSchema({
-    strength: {
+    characteristic: {
         type: String,
     }
 });
@@ -11,13 +11,13 @@ var CharacteristicsSchema = new SimpleSchema({
 Characteristics.attachSchema(CharacteristicsSchema);
 
 Characteristics.allow({
-    // insert(userId, step) {
-    //     return userId && step.owner === userId;
-    // },
-    // update(userId, step, fields, modifier) {
-    //     return userId && step.owner === userId;
-    // },
-    // remove(userId, step) {
-    //     return userId && step.owner === userId;
-    // }
+    insert(userId, characteristic) {
+         return true;
+    },
+    update(userId, characteristic, fields, modifier) {
+         return true;
+    },
+    remove(userId, characteristic) {
+         return true;
+    }
 });

@@ -39,32 +39,8 @@ class AdminQuestion {
         Questions.insert(question);
         this.sort();
     }
-    view(question){
-        this.$state.go("admin-answer",{answerId:question._id});
-    }
     sort()
     {
-
-        function sortToMin(self,min)
-        {
-            if(min!==1)
-            {
-                Questions.update({"_id":this.questions[0]._id},{$set:{"questionIndex":1}});
-            }
-            for(var i=0; i<self.questions.length-1; i++)
-            {
-                var question1 = self.questions[i];
-                for(j=i+1; j<self.questions.length; j++)
-                {
-                    var question2=self.questions[j];
-                    var delta=question2.questionIndex-question1.questionIndex;
-                    if(delta+1!==0)
-                    {
-                        Questions.update({"_id":question2._id},{$set:{"questionIndex":question2.questionIndex-delta}});
-                    }
-                }
-            }
-        }
         for(var i=0; i<this.questions.length; i++)
         {
             var tmpQuestion= this.questions[i];

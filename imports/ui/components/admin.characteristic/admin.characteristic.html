@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="section">
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>Charakteristiken</h4></li>
+            <li  class="collection-item" ng-repeat="characteristic in $ctrl.characteristics">
+                <div class="row">
+                    <div class="input-field col s10">
+                        <input placeholder="Charakteristik" ng-model="characteristic.characteristic" ng-change="$ctrl.update(characteristic)">
+                    </div>
+                    <button class="btn btn-large col s2" ng-click="$ctrl.remove(characteristic)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="section">
+        <div class="card">
+            <div class="card-content">
+                <h4>Erstellen</h4>
+                <div class="input-field row">
+                    <input class="" placeholder="Charakteristik" ng-model="newCharacteristic">
+                </div>
+                <div class="row">
+                    <button class="btn" ng-click="$ctrl.add({characteristic: newCharacteristic});">
+                        Erstellen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

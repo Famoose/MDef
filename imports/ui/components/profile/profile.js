@@ -1,12 +1,36 @@
 import {Meteor} from 'meteor/meteor';
+import {Characteristics} from '../../../api/characteristics/index.js';
 import Chart from "chart.js";
-
 import templateUrl from './profile.html';
 
 class Profile {
     constructor($scope) {
         $scope.viewModel(this);
 
+        var self=this;
+        Meteor.subscribe('characteristics', function(){
+            self.generateRadar();
+        });
+
+        this.helpers({
+            characteristics() {
+                return Characteristics.find({}, {
+                    sort: {
+                        characteristic: 1
+                    }
+                });
+            }
+        });
+
+    }
+
+    generateRadar(){
+        var labels=[];
+        var characteristics=this.characteristics;
+        for(var i=0; i<characteristics.length; i++)
+        {
+            labels.push(characteristics[i].characteristic);
+        }
         (function ($) {
             $(function () {
                 Chart.defaults.global.defaultFontSize=16;
@@ -14,7 +38,7 @@ class Profile {
                 var chart=new Chart(ctx,{
                     type: 'radar',
                     data: {
-                        labels: ["Durchsetzungsstark", "Zuverlässig", "Kooperativ", "Eigeninitiativ", "Sensitiv", "Zurückhaltend"],
+                        labels: labels,
                         datasets: [
                             {
                                 label: "Gesamt",
