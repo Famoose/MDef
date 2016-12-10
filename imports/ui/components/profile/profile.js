@@ -44,7 +44,7 @@ class Profile {
         (function ($) {
             $(function () {
                 Chart.defaults.global.legend.display = false;
-                Chart.defaults.global.defaultFontSize=16;
+                Chart.defaults.global.defaultFontSize=10;
                 var ctx = $("#chart");
                 var chart=new Chart(ctx,{
                     type: 'radar',
@@ -70,9 +70,11 @@ class Profile {
                                 beginAtZero: true,
                                 suggestedMax:10,
                                 suggestedMin:0,
-                                stepSize:1,
+                                stepSize:1
                             }
-                        }
+                        },
+                        showXAxisLabel:false,
+                        showYAxisLabel:false
                     }
                 });
             }); // end of document ready
