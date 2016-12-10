@@ -2,20 +2,23 @@
     <div class="section">
         <ul class="collection with-header">
             <li class="collection-header"><h4>Fragen</h4></li>
-            <li  class="collection-item" ng-repeat="question in $ctrl.questions">
+            <li class="collection-item" ng-repeat="question in $ctrl.questions">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="Frage" ng-model="question.question" ng-blur="$ctrl.update(question)">
+                        <input placeholder="Frage" class="input-normal" ng-model="question.question" ng-blur="$ctrl.update(question)">
                     </div>
-                    <div class="input-field col s8">
-                        <input placeholder="Frage-Position" ng-model="question.questionIndex" ng-blur="$ctrl.updateIndex(question)">
+                    <div class="input-field row col s12">
+                        <input placeholder="Frage-Position" class="input-normal col s4 m8 l9"
+                               ng-model="question.questionIndex" ng-blur="$ctrl.updateIndex(question)">
+                        <div class="s4 m2 l2 center-align">
+                            <button class="btn btn-large" ng-click="$ctrl.view(question)">
+                                <i class="material-icons">search</i>
+                            </button>
+                            <button class="btn btn-large" ng-click="$ctrl.remove(question)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </div>
                     </div>
-                    <button class="btn btn-large col s2" ng-click="$ctrl.view(question)">
-                        <i class="material-icons">search</i>
-                    </button>
-                    <button class="btn btn-large col s2" ng-click="$ctrl.remove(question)">
-                        <i class="material-icons">delete</i>
-                    </button>
                 </div>
             </li>
         </ul>
@@ -24,16 +27,18 @@
         <div class="card">
             <div class="card-content">
                 <h4>Erstellen</h4>
-                <div class="input-field row">
-                    <input class="" placeholder="Frage" ng-model="newQuestion">
-                </div>
-                <div class="input-field row">
-                    <input class="" placeholder="Frageposition" ng-model="newQuestionIndex">
-                </div>
                 <div class="row">
-                    <button class="btn" ng-click="$ctrl.add({question: newQuestion,questionIndex:newQuestionIndex});">
-                        Erstellen
-                    </button>
+                    <div class="input-field col s12">
+                        <input class="input-normal" placeholder="Frage" ng-model="newQuestion">
+                    </div>
+                    <div class="input-field row col s12">
+                        <input class="input-normal col s8 m10 l10" placeholder="Frageposition" ng-model="newQuestionIndex">
+                        <div class="s4 m2 l2 center-align">
+                            <button class="btn btn-large" ng-click="$ctrl.add({question: newQuestion,questionIndex:newQuestionIndex});">
+                                <i class="material-icons">note_add</i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
