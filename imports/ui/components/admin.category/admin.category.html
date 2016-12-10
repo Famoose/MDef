@@ -2,17 +2,18 @@
     <div class="section">
         <ul class="collection with-header">
             <li class="collection-header"><h4>Fragebögen</h4></li>
-            <li  class="collection-item" ng-repeat="category in $ctrl.categories">
-                <div class="row">
-                    <div class="input-field col s8">
-                        <input placeholder="Fragebogen" ng-model="category.category" ng-change="$ctrl.update(category)">
+            <li class="collection-item" ng-repeat="category in $ctrl.categories">
+                <div class="input-field row">
+                    <input placeholder="Fragebogen" class="input-normal col s4 m8 l9" ng-model="category.category"
+                           ng-change="$ctrl.update(category)">
+                    <div class="col s8 m4 l3 center-align">
+                        <button class="btn btn-large" ng-click="$ctrl.view(category)">
+                            <i class="material-icons">search</i>
+                        </button>
+                        <button class="btn btn-large" ng-click="$ctrl.remove(category)">
+                            <i class="material-icons">delete</i>
+                        </button>
                     </div>
-                    <button class="btn btn-large col s2" ng-click="$ctrl.view(category)">
-                        <i class="material-icons">search</i>
-                    </button>
-                    <button class="btn btn-large col s2" ng-click="$ctrl.remove(category)">
-                        <i class="material-icons">delete</i>
-                    </button>
                 </div>
             </li>
         </ul>
@@ -22,12 +23,12 @@
             <div class="card-content">
                 <h4>Erstellen</h4>
                 <div class="input-field row">
-                    <input class="" placeholder="Fragebogen" ng-model="newCategory">
-                </div>
-                <div class="row">
-                    <button class="btn" ng-click="$ctrl.add({category: newCategory});">
-                        Erstellen
-                    </button>
+                    <input class="input-normal col s8 m10 l10" placeholder="Fragebogen" ng-model="newCategory">
+                    <div class="s4 m2 l2 center-align">
+                        <button class="btn btn-large" ng-click="$ctrl.add({category: newCategory});">
+                            <i class="material-icons">note_add</i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

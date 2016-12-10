@@ -12,41 +12,11 @@ p {
     color: white;
 }
 
-.parallax-container {
-    min-height: 380px;
-    line-height: 0;
-    height: auto;
-    color: rgba(255,255,255,.9);
-}
-.parallax-container .section {
-    width: 100%;
-}
-
-@media only screen and (max-width : 992px) {
-    .parallax-container .section {
-        position: absolute;
-        top: 40%;
-    }
-    #index-banner .section {
-        top: 10%;
-    }
-}
-
-@media only screen and (max-width : 600px) {
-    #index-banner .section {
-        top: 0;
-    }
-}
-
 .icon-block {
     padding: 0 15px;
 }
 .icon-block .material-icons {
     font-size: inherit;
-}
-
-footer.page-footer {
-    margin: 0;
 }
 
 body {
@@ -70,11 +40,13 @@ nav{
         margin-top: 25%;
     }
 }
+.btn-bold{
+    font-size: 1.5em;
+}
 .btn-large{
     background-color: #333333;
     font-weight: bold;
     color: white;
-    font-size: 1.5em;
 }
 .btn-large:hover{
     background-color: #888;
@@ -100,6 +72,15 @@ nav{
     -webkit-box-shadow: 0 1px 0 0 white !important;
     -moz-box-shadow: 0 1px 0 0 white !important;
     box-shadow: 0 1px 0 0 white !important;
+}
+.input-normal{
+    color: #333 !important;
+}
+.input-normal:focus{
+    border-bottom: 1px solid #333 !important;
+    -webkit-box-shadow: 0 1px 0 0 #333 !important;
+    -moz-box-shadow: 0 1px 0 0 #333 !important;
+    box-shadow: 0 1px 0 0 #333 !important;
 }
 
 #slider {
