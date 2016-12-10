@@ -23,7 +23,7 @@ class Register {
                     this.error = err;
                     Materialize.toast(this.error, 4000);
                 } else {
-                    this.$state.go('home');
+                    this.$state.go('profile');
                 }
             })
         );
