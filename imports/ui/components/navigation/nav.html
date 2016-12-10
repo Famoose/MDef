@@ -1,12 +1,12 @@
 <nav role="navigation">
-    <a class="nav-wrapper container">
+    <div class="nav-wrapper container">
         <a id="logo-container" ui-sref="home" class="brand-logo right">PFinder</a>
         <ul class="left hide-on-med-and-down">
             <li>
                 <a ng-show="$ctrl.isLoggedIn">{{ $ctrl.currentUser.emails[0].address }}</a>
             </li>
-            <li ng-show="$ctrl.isLoggedIn"><a ui-sref="admin-category">Admin Kategorie</a></li>
-            <li ng-show="$ctrl.isLoggedIn"><a ui-sref="admin-characteristic">Admin Charakteristik</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-category">Admin Kategorie</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-characteristic">Admin Charakteristik</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="question">Question</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="profile">Profil</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="login" ng-click="$ctrl.logout()">Logout</a></li>
@@ -17,8 +17,8 @@
             <li>
                 <a ng-show="$ctrl.isLoggedIn">{{ $ctrl.currentUser.emails[0].address }}</a>
             </li>
-            <li ng-show="$ctrl.isLoggedIn"><a ui-sref="admin-category">Admin Kategorie</a></li>
-            <li ng-show="$ctrl.isLoggedIn"><a ui-sref="admin-characteristic">Admin Charakteristik</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-category">Admin Kategorie</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-characteristic">Admin Charakteristik</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="question">Question</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="profile">Profil</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ng-click="$ctrl.logout()">Logout</a></li>

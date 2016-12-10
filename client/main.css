@@ -48,6 +48,9 @@ nav{
     font-weight: bold;
     color: white;
 }
+.btn-login{
+    font-size:1.5em;
+}
 .btn-large:hover{
     background-color: #888;
 }

@@ -24,12 +24,12 @@ Questions.attachSchema(QuestionsSchema);
 
 Questions.allow({
     insert(userId, question) {
-        return true;
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     },
     update(userId, step, fields, modifier) {
-        return true;
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     },
     remove(userId, step) {
-        return true;
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     }
 });

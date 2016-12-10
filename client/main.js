@@ -8,6 +8,7 @@ import nav from '../imports/ui/components/navigation/nav';
 import question from '../imports/ui/components/question/question';
 import profile from '../imports/ui/components/profile/profile';
 import register from '../imports/ui/components/register/register';
+import forgotpw from '../imports/ui/components/forgotpw/forgotpw';
 import adminCharacteristic from '../imports/ui/components/admin.characteristic/admin.characteristic';
 import adminCategory from '../imports/ui/components/admin.category/admin.category';
 import adminQuestion from '../imports/ui/components/admin.question/admin.question';
@@ -21,6 +22,7 @@ angular.module('pfinder', [
     question.name,
     profile.name,
     register.name,
+    forgotpw.name,
     adminCharacteristic.name,
     adminCategory.name,
     adminQuestion.name,

@@ -23,12 +23,12 @@ QuestionsCharacteristics.attachSchema(QuestionsCharacteristicsSchema);
 
 QuestionsCharacteristics.allow({
     insert(userId, questionCharacteristic) {
-        return true;
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     },
     update(userId, questionCharacteristic, fields, modifier) {
-        return true;
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     },
     remove(userId, questionCharacteristic) {
-        return true;
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     }
 });

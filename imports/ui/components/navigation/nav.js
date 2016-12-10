@@ -24,17 +24,29 @@ class Nav {
             currentUser() {
                 return Meteor.user();
             }
+
         });
     }
-    logout(){
-        Accounts.logout(function(){this.$state.go('login')}.bind(this));
+
+    logout() {
+        Accounts.logout(function () {
+            this.$state.go('login')
+        }.bind(this));
     }
+
+    hasRoleAdmin() {
+        if (!!Meteor.userId()) {
+            return Roles.userIsInRole(Meteor.userId(), ["admin"], "default-group");
+        }
+        return false;
+
+    }
+
 }
 const name = 'navigation';
 // create a module
-export default angular.module(name, [
-])
+export default angular.module(name, [])
     .component(name, {
         templateUrl,
-        controller: ['$scope', '$state',Nav]
+        controller: ['$scope', '$state', Nav]
     });

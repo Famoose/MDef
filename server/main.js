@@ -8,7 +8,6 @@ import '../imports/api/questions-characteristcs/index';
 
 Meteor.startup(() => {
     process.env.MAIL_URL = "smtp://personal.finder.app%40gmail.com:$Welcome16@smtp.gmail.com";
-
     // if(Characteristics.find().count === 0){
     //     Characteristics.insert("Zielstrebig");
     //     Characteristics.insert("Teamfähig");

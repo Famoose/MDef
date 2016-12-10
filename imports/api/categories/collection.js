@@ -15,12 +15,12 @@ Categories.attachSchema(CategoriesSchema);
 
 Categories.allow({
     insert(userId, category) {
-        return true
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     },
     update(userId, category) {
-        return true;
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     },
     remove(userId, category) {
-        return true;
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     }
 });

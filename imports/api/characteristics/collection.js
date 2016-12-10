@@ -1,4 +1,4 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 export const Characteristics = new Mongo.Collection('characteristics');
 
@@ -12,12 +12,12 @@ Characteristics.attachSchema(CharacteristicsSchema);
 
 Characteristics.allow({
     insert(userId, characteristic) {
-         return true;
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     },
     update(userId, characteristic, fields, modifier) {
-         return true;
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     },
     remove(userId, characteristic) {
-         return true;
+        return Roles.userIsInRole(userId, ["admin"], "default-group");
     }
 });
