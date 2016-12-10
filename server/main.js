@@ -7,6 +7,7 @@ import '../imports/api/questions-characteristcs/index';
 // import { Characteristics } from '../imports/api/characteristics/index.js';
 
 Meteor.startup(() => {
+    process.env.MAIL_URL = "smtp://personal.finder.app%40gmail.com:$Pfinder.@smtp.gmail.com";
     Accounts.config({sendVerificationEmail: true});
     var user = Accounts.findUserByUsername(process.env.DUSERNAME);
     if(!user){
