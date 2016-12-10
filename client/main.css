@@ -110,4 +110,6 @@ nav{
 .noUi-connect{
     background-color: #FAFAFA!important;
 }
-
+.collection-header h4{
+    display: inline-block;
+}

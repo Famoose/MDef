@@ -4,6 +4,7 @@ import templateUrl from './admin.question.details.html';
 import noUiSlider from 'nouislider';
 import {Characteristics} from  '../../../api/characteristics/index.js';
 import {QuestionsCharacteristics} from '../../../api/questions-characteristcs/index.js';
+import {Questions} from '../../../api/questions/index.js';
 import { Template } from 'meteor/templating';
 
 class AdminQuestionDetails {
@@ -11,6 +12,7 @@ class AdminQuestionDetails {
         $scope.viewModel(this);
 
         Meteor.subscribe('characteristics');
+        Meteor.subscribe('questions');
         Meteor.subscribe('questionsCharacteristics');
 
         this.$state=$state;
@@ -34,6 +36,12 @@ class AdminQuestionDetails {
     updateInfluenceValue(questionsCharacteristic)
     {
         QuestionsCharacteristics.update({_id:questionsCharacteristic._id},{$set:{"influence":questionsCharacteristic.influence}});
+    }
+    back()
+    {
+        var question=Questions.findOne({_id:this.$state.params.questionId});
+
+        this.$state.go('admin-question',{catId:question.categoryId});
     }
 }
 const name = 'adminQuestionDetails';
