@@ -7,7 +7,7 @@ import {Questions} from '../../../../api/questions/index.js';
 import {Answers} from '../../../../api/answer/index.js';
 
 class AnswerQuestion {
-    constructor($scope,$state,$timeout) {
+    constructor($scope,$state) {
         $scope.viewModel(this);
         var self=this;
 
@@ -50,6 +50,7 @@ class AnswerQuestion {
                 direction: 'rtl',
                 connect: [false, true],
                 orientation: 'vertical',
+                behaviour: 'drag',
                 range: {
                     'min': 0,
                     'max': 10
@@ -85,7 +86,7 @@ export default angular.module(name, [
     ])
     .component(name, {
         templateUrl,
-        controller: ['$scope','$state','$timeout', AnswerQuestion]
+        controller: ['$scope','$state', AnswerQuestion]
     })
     .config(['$stateProvider', config]);
 

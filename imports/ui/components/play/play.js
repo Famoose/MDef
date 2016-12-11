@@ -7,11 +7,9 @@ class Play {
         var self=this;
         this.$state=$state;
 
-        if(Game.findOne({},{}) === undefined)
-        {
-            Meteor.subscribe('game', init);
-        }
-        else {
+
+        var gameSubHandler=Meteor.subscribe('game', init);
+        if(gameSubHandler.ready()) {
             init();
         }
 
