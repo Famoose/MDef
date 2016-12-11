@@ -1,5 +1,24 @@
 <div class="container">
     <div class="section">
+        <div class="card">
+            <div class="card-content">
+                <h4>Erstellen</h4>
+                <form>
+                    <div class="input-field row">
+                        <input class="iinput-normal col s8 m10 l10" placeholder="Charakteristik"
+                               ng-model="$ctrl.newCharacteristic">
+                        <div class="s4 m2 l2 center-align">
+                            <button class="btn btn-large"
+                                    ng-click="$ctrl.add({characteristic: $ctrl.newCharacteristic});">
+                                <i class="material-icons">note_add</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="section">
         <ul class="collection with-header">
             <li class="collection-header"><h4>Charakteristiken</h4></li>
             <li class="collection-item" ng-repeat="characteristic in $ctrl.characteristics">
@@ -17,22 +36,5 @@
                 </div>
             </li>
         </ul>
-    </div>
-    <div class="section">
-        <div class="card">
-            <div class="card-content">
-                <h4>Erstellen</h4>
-                <div class="input-field row">
-                    <input class="iinput-normal col s8 m10 l10" placeholder="Charakteristik"
-                           ng-model="newCharacteristic">
-                    <div class="s4 m2 l2 center-align">
-                        <button class="btn btn-large"
-                                ng-click="$ctrl.add({characteristic: newCharacteristic});">
-                            <i class="material-icons">note_add</i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

@@ -1,12 +1,42 @@
 <div class="container">
     <div class="section">
+        <div class="card">
+            <div class="card-content">
+                <div class="fixed-action-btn horizontal hide-on-large-only">
+                    <a class="btn-floating btn-large waves-effect waves-light dark-blue" ng-click="$ctrl.back()"><i class="material-icons">keyboard_return</i></a>
+                </div>
+                <a class="btn-floating btn-large waves-effect waves-light dark-blue right hide-on-med-and-down" ng-click="$ctrl.back()"><i class="material-icons">keyboard_return</i></a>
+
+                <h4>Erstellen</h4>
+                <form>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input class="input-normal" placeholder="Frage" ng-model="$ctrl.newQuestion">
+                        </div>
+                        <div class="input-field row col s12">
+                            <input class="input-normal col s8 m10 l10" placeholder="Frageposition"
+                                   ng-model="$ctrl.newQuestionIndex">
+                            <div class="s4 m2 l2 center-align">
+                                <button class="btn btn-large"
+                                        ng-click="$ctrl.add({question: $ctrl.newQuestion,questionIndex:$ctrl.newQuestionIndex});">
+                                    <i class="material-icons">note_add</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="section">
         <ul class="collection with-header">
             <li class="collection-header"><h4>Fragen</h4>
-                <button class="btn btn-large right" ng-click="$ctrl.back()"><i class="material-icons">keyboard_return</i></button></li>
+            </li>
             <li class="collection-item" ng-repeat="question in $ctrl.questions">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="Frage" class="input-normal" ng-model="question.question" ng-blur="$ctrl.update(question)">
+                        <input placeholder="Frage" class="input-normal" ng-model="question.question"
+                               ng-blur="$ctrl.update(question)">
                     </div>
                     <div class="input-field row col s12">
                         <input placeholder="Frage-Position" class="input-normal col s4 m8 l9"
@@ -23,25 +53,5 @@
                 </div>
             </li>
         </ul>
-    </div>
-    <div class="section">
-        <div class="card">
-            <div class="card-content">
-                <h4>Erstellen</h4>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input class="input-normal" placeholder="Frage" ng-model="newQuestion">
-                    </div>
-                    <div class="input-field row col s12">
-                        <input class="input-normal col s8 m10 l10" placeholder="Frageposition" ng-model="newQuestionIndex">
-                        <div class="s4 m2 l2 center-align">
-                            <button class="btn btn-large" ng-click="$ctrl.add({question: newQuestion,questionIndex:newQuestionIndex});">
-                                <i class="material-icons">note_add</i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

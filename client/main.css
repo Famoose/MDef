@@ -70,6 +70,9 @@ nav{
     color: white !important;
     font-size: 1.5em !important;
 }
+.dark-blue{
+    background-color: #1e5293 !important;
+}
 .input-login:focus{
     border-bottom: 1px solid white !important;
     -webkit-box-shadow: 0 1px 0 0 white !important;

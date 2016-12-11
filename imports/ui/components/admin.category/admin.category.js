@@ -29,6 +29,7 @@ class AdminCategory {
     }
     add(category) {
         Categories.insert(category);
+        this.newCategory = null;
     }
     view(category){
         this.$state.go('admin-question',{catId:category._id});

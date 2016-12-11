@@ -28,6 +28,7 @@ class AdminCharacteristic {
     }
     add(characteristic) {
         Characteristics.insert(characteristic);
+        this.newCharacteristic = null;
     }
 }
 const name = 'adminCharacteristic';

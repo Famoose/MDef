@@ -58,6 +58,8 @@ class AdminQuestion {
             QuestionsCharacteristics.insert({characteristicId: characteristicId, questionId: questionId, influence: 0});
         }
         this.sort();
+        this.newQuestion = null;
+        this.newQuestionIndex++;
     }
     view(question)
     {
