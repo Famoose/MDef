@@ -50,6 +50,7 @@ class AnswerQuestion {
                 direction: 'rtl',
                 connect: [false, true],
                 orientation: 'vertical',
+                behaviour: 'drag',
                 range: {
                     'min': 0,
                     'max': 10
