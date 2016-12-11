@@ -28,10 +28,15 @@ class Profile {
         });
 
         Meteor.subscribe('categories');
-        Meteor.subscribe('characteristics', function(){
+
+        var characteristicsSubHandler=Meteor.subscribe('characteristics', function(){
             self.generateRadar();
         });
 
+        if(characteristicsSubHandler.ready())
+        {
+            self.generateRadar();
+        }
     }
 
     generateRadar(){

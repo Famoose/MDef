@@ -3,6 +3,8 @@ import '../imports/api/characteristics/index';
 import '../imports/api/categories/index';
 import '../imports/api/questions/index';
 import '../imports/api/questions-characteristcs/index';
+import '../imports/api/game/index.js';
+import '../imports/api/answer/index.js';
 // import '../imports/api/questions/index.js';
 // import { Characteristics } from '../imports/api/characteristics/index.js';
 
