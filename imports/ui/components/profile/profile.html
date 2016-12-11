@@ -1,12 +1,14 @@
-
 <div class="container">
     <div class="card">
-        <div class="card-content">
-            <div class="row">
-                <div class="col m4 s12">
-                    <p ng-repeat="category in $ctrl.categories">{{category.category}}</p>
+        <div class="row">
+            <div class="col m4 s12">
+                <div class="collection" style="margin: 0;">
+                    <a class="collection-item black-text"
+                       ng-repeat="category in $ctrl.categories">{{category.category}}</a>
                 </div>
-                <div class="col m8 s12">
+            </div>
+            <div class="col m8 s12">
+                <div class="card-content">
                     <div class="chart-container">
                         <canvas id="chart" width="400" height="400"></canvas>
                     </div>
