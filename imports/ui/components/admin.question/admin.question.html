@@ -8,17 +8,17 @@
                 <a class="btn-floating btn-large waves-effect waves-light dark-blue right hide-on-med-and-down" ng-click="$ctrl.back()"><i class="material-icons">keyboard_return</i></a>
 
                 <h4>Erstellen</h4>
-                <form>
+                <form name="newQuestion" ng-submit="newQuestion.$valid && $ctrl.add({question: $ctrl.newQuestion,questionIndex:$ctrl.newQuestionIndex});">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input class="input-normal" placeholder="Frage" ng-model="$ctrl.newQuestion">
+                            <input class="input-normal" placeholder="Frage" ng-model="$ctrl.newQuestion" ng-required="true">
                         </div>
                         <div class="input-field row col s12">
                             <input class="input-normal col s8 m10 l10" placeholder="Frageposition"
-                                   ng-model="$ctrl.newQuestionIndex">
+                                   ng-model="$ctrl.newQuestionIndex"  ng-required="true">
                             <div class="s4 m2 l2 center-align">
                                 <button class="btn btn-large"
-                                        ng-click="$ctrl.add({question: $ctrl.newQuestion,questionIndex:$ctrl.newQuestionIndex});">
+                                        type="submit">
                                     <i class="material-icons">note_add</i>
                                 </button>
                             </div>

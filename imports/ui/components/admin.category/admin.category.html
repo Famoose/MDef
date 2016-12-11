@@ -3,11 +3,11 @@
         <div class="card">
             <div class="card-content">
                 <h4>Erstellen</h4>
-                <form>
+                <form name="newCategory" ng-submit="newCategory.$valid && $ctrl.add({category: $ctrl.newCategory});">
                     <div class="input-field row">
-                        <input class="input-normal col s8 m10 l10" placeholder="Fragebogen" ng-model="$ctrl.newCategory">
+                        <input class="input-normal col s8 m10 l10" placeholder="Fragebogen" ng-model="$ctrl.newCategory" ng-required="true">
                         <div class="s4 m2 l2 center-align">
-                            <button class="btn btn-large" ng-click="$ctrl.add({category: $ctrl.newCategory});">
+                            <button class="btn btn-large" type="submit">
                                 <i class="material-icons">note_add</i>
                             </button>
                         </div>

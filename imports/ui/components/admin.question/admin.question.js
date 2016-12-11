@@ -59,7 +59,7 @@ class AdminQuestion {
         }
         this.sort();
         this.newQuestion = null;
-        this.newQuestionIndex++;
+        this.newQuestionIndex=this.questions.length+1;
     }
     view(question)
     {

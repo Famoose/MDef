@@ -3,12 +3,12 @@
         <div class="card">
             <div class="card-content">
                 <h4>Erstellen</h4>
-                <form>
+                <form name="newCharacteristic" ng-submit="newCharacteristic.$valid && $ctrl.add({characteristic: $ctrl.newCharacteristic});">
                     <div class="input-field row">
                         <input class="iinput-normal col s8 m10 l10" placeholder="Charakteristik"
-                               ng-model="$ctrl.newCharacteristic">
+                               ng-model="$ctrl.newCharacteristic" ng-required="true">
                         <div class="s4 m2 l2 center-align">
-                            <button class="btn btn-large"
+                            <button class="btn btn-large" type="submit"
                                     ng-click="$ctrl.add({characteristic: $ctrl.newCharacteristic});">
                                 <i class="material-icons">note_add</i>
                             </button>
