@@ -1,8 +1,8 @@
 <div class="container login-container row">
-    <form class="col offset-m3 m6 offset-s1 s10" novalidate>
+    <form class="col offset-m3 m6 offset-s1 s10" name="forgotpw" ng-submit="forgotpw.$valid && $ctrl.reset()" novalidate>
         <div class="row">
             <div class="input-field col s12"><input placeholder="Email" ng-model="$ctrl.credentials.email" class="input-login validate" type="email"></div>
-            <div class="input-field col s12"><button class="waves-effect waves-light btn-large btn-login center-align" ng-click="$ctrl.reset()" style="width:100%;">Senden</button></div>
+            <div class="input-field col s12"><input type="submit" value="Senden" class="waves-effect waves-light btn-large btn-login" style="width:100%;"/></div>
         </div>
     </form>
 </div>

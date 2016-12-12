@@ -24,7 +24,7 @@ class Login {
             this.$bindToContext((err) => {
                 if (err) {
                     this.error = err;
-                    Materialize.toast(this.error, 4000);
+                    Materialize.toast("Benutzer oder Passwort ist falsch", 4000);
                 } else {
                     this.$state.go('profile');
                 }

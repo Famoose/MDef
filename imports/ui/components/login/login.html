@@ -1,10 +1,10 @@
 <div class="container login-container row">
-    <form class="col offset-m3 m6 offset-s1 s10" novalidate>
+    <form class="col offset-m3 m6 offset-s1 s10" name="login" ng-submit="login.$valid && $ctrl.login()" novalidate>
         <div class="row">
             <div class="input-field col s12"><input placeholder="Email" ng-model="$ctrl.credentials.email" class="input-login validate" type="email"></div>
             <div class="input-field col s12"><input placeholder="Password" ng-model="$ctrl.credentials.password" class="input-login validate" type="password"></div>
-            <div class="input-field col s12"><button class="waves-effect waves-light btn-large btn-login" ng-click="$ctrl.login()" style="width:100%;">Login</button></div>
-            <div class="input-field col s12"><a ui-sref="register" class="waves-effect waves-light btn-flat white-text" style="width:100%;">Register</a></div>
+            <div class="input-field col s12"><input type="submit" value="Login" class="waves-effect waves-light btn-large btn-login" style="width:100%;"/></div>
+            <div class="input-field col s12"><a ui-sref="register" class="waves-effect waves-light btn-flat white-text" style="width:100%;">Registrieren</a></div>
             <div class="input-field col s12"><a ui-sref="forgotpw" class="waves-effect waves-light btn-flat white-text" style="width:100%;">Passwort vergessen</a></div>
 
         </div>
