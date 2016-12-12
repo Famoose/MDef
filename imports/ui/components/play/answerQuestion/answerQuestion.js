@@ -13,10 +13,10 @@ class AnswerQuestion {
 
         var gameSubHandler=Meteor.subscribe('game',init);
         var questionSubHandler=Meteor.subscribe('questions',init);
-        Meteor.subscribe('answers',init);
+        var answersSubHandler=Meteor.subscribe('answers',init);
 
         function init(){
-            if(gameSubHandler.ready() && questionSubHandler.ready())
+            if(gameSubHandler.ready() && questionSubHandler.ready() && answersSubHandler.ready())
             {
                 var game=Game.findOne({'userId': Meteor.userId(), 'isPlaying': true});
                 var question =Questions.findOne({'categoryId':game.categoryId, 'questionIndex':game.questionIndex});
@@ -24,7 +24,6 @@ class AnswerQuestion {
                 self.initSlider(question.question,function (value)
                 {
                     var sumOfQuestions=Questions.find({categoryId:game.categoryId}).fetch().length;
-
                     Answers.insert({userId:Meteor.userId(),questionId: question._id,answer:parseInt(value)});
                     if(game.questionIndex==sumOfQuestions)
                     {
@@ -44,6 +43,8 @@ class AnswerQuestion {
     initSlider(question,callback)
     {
         var slider = document.getElementById("slider");
+        slider.innerHTML="";
+        slider.noUiSlider=undefined;
         if(slider.noUiSlider===undefined) {
             noUiSlider.create(slider, {
                 start: 0,
@@ -56,18 +57,14 @@ class AnswerQuestion {
                     'max': 10
                 }
             });
+            slider.noUiSlider.on('change', function(){
+                callback(slider.noUiSlider.get());
+            });
+            $(slider).css("height",window.screen.height - window.screen.height/12 - $("nav").height() -100);
+            window.addEventListener('resize', function() {
+                $(slider).css("height", window.screen.height -window.screen.height/12 - $("nav").height() -100);
+            }, true);
         }
-        else
-        {
-            slider.noUiSlider.reset();
-        }
-        slider.noUiSlider.on('change', function(){
-            callback(slider.noUiSlider.get());
-        });
-        $(slider).css("height",window.screen.height - window.screen.height/12 - $("nav").height() -100);
-        window.addEventListener('resize', function() {
-            $(slider).css("height", window.screen.height -window.screen.height/12 - $("nav").height() -100);
-        }, true);
         var title=$('#slider').find('.noUi-connect').find("h5");
         if(title===undefined || !title.length)
         {

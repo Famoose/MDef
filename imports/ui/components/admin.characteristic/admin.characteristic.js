@@ -7,7 +7,7 @@ class AdminCharacteristic {
     constructor($scope) {
         $scope.viewModel(this);
 
-        this.subscribe('characteristics');
+        Meteor.subscribe('characteristics');
         this.helpers({
             characteristics() {
                 return Characteristics.find({}, {
