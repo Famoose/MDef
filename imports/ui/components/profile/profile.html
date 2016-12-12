@@ -4,7 +4,7 @@
             <div class="col m4 s12">
                 <div class="collection" style="margin: 0;">
                     <a class="collection-item black-text"
-                       ng-repeat="category in $ctrl.categories">{{category.category}}</a>
+                       ng-repeat="category in $ctrl.categories" ng-click="$ctrl.setCategory(category)" style="cursor: pointer">{{category.category}}</a>
                 </div>
             </div>
             <div class="col m8 s12">

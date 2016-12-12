@@ -45,6 +45,7 @@ class AnswerQuestion {
         var slider = document.getElementById("slider");
         slider.innerHTML="";
         slider.noUiSlider=undefined;
+
         if(slider.noUiSlider===undefined) {
             noUiSlider.create(slider, {
                 start: 0,

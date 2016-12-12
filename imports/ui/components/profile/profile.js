@@ -53,7 +53,7 @@ class Profile {
             var dataHolder={};
 
             if (category === undefined || !category) {
-                category = Categories.findOne();
+                category = self.categories[0];
             }
             if (category !== undefined || !category) {
                 for (var x = 0; x < characteristics.length; x++) {
@@ -90,7 +90,7 @@ class Profile {
                 };
                 dataset.data = [];
                 for (var i = 0; i < characteristics.length; i++) {
-                    dataset.data.push(dataHolder[characteristics[i]._id].value / dataHolder[characteristics[i]._id].factor);
+                    dataset.data.push((dataHolder[characteristics[i]._id].value / dataHolder[characteristics[i]._id].factor)/10*10);
                 }
                 datasets.push(dataset);
                 (function ($) {
@@ -122,6 +122,11 @@ class Profile {
                 })(jQuery); // end of jQuery name space
             }
         }
+    }
+    setCategory(category)
+    {
+        var self=this;
+        self.generateRadar(self,category);
     }
 }
 const name = 'profile';
