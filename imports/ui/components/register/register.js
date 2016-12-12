@@ -21,7 +21,15 @@ class Register {
             this.$bindToContext((err) => {
                 if (err) {
                     this.error = err;
-                    Materialize.toast(this.error, 4000);
+                    console.log(this.error.error);
+                    if(this.error.error === 400){
+                        Materialize.toast("Sie müssen eine gültige Email angeben", 4000);
+                    }else if (this.error.error === 403) {
+                        Materialize.toast("Email ist bereits vergeben", 4000);
+                    }else{
+                        Materialize.toast(this.error.reason, 4000);
+                    }
+
                 } else {
                     this.$state.go('profile');
                 }

@@ -18,7 +18,12 @@ class Forgotpw {
     reset() {
         Accounts.forgotPassword(this.credentials, this.$bindToContext((err) => {
             if (err) {
-                Materialize.toast(this.error, 4000);
+                this.error = err;
+               if (this.error.error === 403) {
+                    Materialize.toast("Keine gültige Email", 4000);
+                }else{
+                    Materialize.toast(this.error.reason, 4000);
+                }
             } else {
                 this.$state.go('login');
             }
