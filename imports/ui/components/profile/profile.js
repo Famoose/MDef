@@ -93,33 +93,41 @@ class Profile {
                     dataset.data.push((dataHolder[characteristics[i]._id].value / dataHolder[characteristics[i]._id].factor)/10*10);
                 }
                 datasets.push(dataset);
-                (function ($) {
-                    $(function () {
-                        Chart.defaults.global.legend.display = false;
-                        Chart.defaults.global.defaultFontSize = 10;
-                        var ctx = $("#chart");
-                        var chart = new Chart(ctx, {
-                            type: 'radar',
-                            data: {
-                                labels: labels,
-                                datasets: datasets
+
+                Chart.defaults.global.legend.display = false;
+                Chart.defaults.global.defaultFontSize = 10;
+                var ctx = $("#chart");
+                if(self.chart===undefined)
+                {
+                    create();
+                }
+                else
+                {
+                    self.chart.destroy();
+                    create();
+                }
+                function create(){
+                    self.chart = new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: labels,
+                            datasets: datasets
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scale: {
+                                ticks: {
+                                    beginAtZero: true,
+                                    suggestedMax: 10,
+                                    suggestedMin: 0,
+                                    stepSize: 1
+                                }
                             },
-                            options: {
-                                maintainAspectRatio: false,
-                                scale: {
-                                    ticks: {
-                                        beginAtZero: true,
-                                        suggestedMax: 10,
-                                        suggestedMin: 0,
-                                        stepSize: 1
-                                    }
-                                },
-                                showXAxisLabel: false,
-                                showYAxisLabel: false
-                            }
-                        });
-                    }); // end of document ready
-                })(jQuery); // end of jQuery name space
+                            showXAxisLabel: false,
+                            showYAxisLabel: false
+                        }
+                    });
+                }
             }
         }
     }
