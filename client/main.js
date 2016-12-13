@@ -19,6 +19,8 @@ import play from "../imports/ui/components/play/play.js";
 import playChooseCategory from "../imports/ui/components/play/chooseCategory/chooseCategory.js";
 import playAnswerQuestion from "../imports/ui/components/play/answerQuestion/answerQuestion.js";
 
+import {CategoryUser} from "../imports/service/CategoryUser.js";
+
 angular.module('pfinder', [
     angularMeteor,
     uiRouter,
@@ -38,7 +40,8 @@ angular.module('pfinder', [
     playChooseCategory.name,
     playAnswerQuestion.name
 
-]).config(['$locationProvider', '$urlRouterProvider',config]).run(['$rootScope', '$state',run]);
+]).service("CategoryUser",CategoryUser)
+    .config(['$locationProvider', '$urlRouterProvider',config]).run(['$rootScope', '$state',run]);
 
 function onReady() {
     angular.bootstrap(document, [

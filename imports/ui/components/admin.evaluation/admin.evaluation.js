@@ -11,6 +11,8 @@ class AdminEvaluation {
         Meteor.subscribe('users');
         this.$state = $state;
 
+        var self=this;
+
         this.helpers({
             categories() {
                 return Categories.find({}, {
@@ -19,10 +21,11 @@ class AdminEvaluation {
                     }
                 });
             },
-            users(){
-                return Meteor.users.find({}, {fields: {emails: 1, profile: 1}})
+            user(){
+                return Meteor.users.findOne({_id: self.$state.params.uid}, {fields: {emails: 1, profile: 1}})
             }
         });
+
     }
 }
 const name = 'adminEvaluation';
