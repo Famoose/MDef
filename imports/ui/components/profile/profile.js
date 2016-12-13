@@ -9,10 +9,11 @@ import Chart from "chart.js";
 import templateUrl from './profile.html';
 
 class Profile {
-    constructor($scope) {
+    constructor($scope,profile) {
         $scope.viewModel(this);
-
+        this.profile=profile;
         var self=this;
+        
 
         this.helpers({
             characteristics() {
@@ -71,8 +72,6 @@ class Profile {
                         var answer = answers[u];
                         for (var x = 0; x < characteristics.length; x++) {
                             var questionCharacteristic = QuestionsCharacteristics.findOne({questionId: question._id, characteristicId: characteristics[x]._id});
-                            console.log("Characteristic:" + characteristics[x].characteristic + " -> Question:" + question.question + " -> Einfluss " + questionCharacteristic.influence +
-                                " -> Answer: " + answer.answer);
                             dataHolder[questionCharacteristic.characteristicId].factor += questionCharacteristic.influence / 100;
                             dataHolder[questionCharacteristic.characteristicId].value += (answer.answer * questionCharacteristic.influence) / 100;
                         }
@@ -90,12 +89,13 @@ class Profile {
                 };
                 dataset.data = [];
                 for (var i = 0; i < characteristics.length; i++) {
-                    dataset.data.push((dataHolder[characteristics[i]._id].value / dataHolder[characteristics[i]._id].factor)/10*10);
+                    dataset.data.push((dataHolder[characteristics[i]._id].value / dataHolder[characteristics[i]._id].factor).toFixed(2));
                 }
                 datasets.push(dataset);
 
                 Chart.defaults.global.legend.display = false;
                 Chart.defaults.global.defaultFontSize = 10;
+
                 var ctx = $("#chart");
                 if(self.chart===undefined)
                 {
@@ -143,7 +143,7 @@ export default angular.module(name, [
 ])
     .component(name, {
         templateUrl,
-        controller: ['$scope', Profile]
+        controller: ['$scope',Profile]
     })
     .config(['$stateProvider', config]);
 

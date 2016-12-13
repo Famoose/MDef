@@ -6,6 +6,7 @@
                 <a ng-show="$ctrl.isLoggedIn">{{ $ctrl.currentUser.emails[0].address }}</a>
             </li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-category">Admin Kategorie</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-users">Admin Users</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-characteristic">Admin Charakteristik</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="play">Spielen</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="profile">Profil</a></li>
@@ -18,6 +19,7 @@
                 <a ng-show="$ctrl.isLoggedIn">{{ $ctrl.currentUser.emails[0].address }}</a>
             </li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-category">Admin Kategorie</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-users">Admin Users</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-characteristic">Admin Charakteristik</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="play">Spielen</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="profile">Profil</a></li>

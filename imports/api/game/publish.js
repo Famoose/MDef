@@ -8,18 +8,17 @@ import { Game } from './collection';
 if (Meteor.isServer) {
     Meteor.publish('game', function() {
         const selector = {
-            // $or: [{
-            //     // when logged in user is the owner
-            //     $and: [{
-            //         owner: this.userId
-            //     }, {
-            //         owner: {
-            //             $exists: true
-            //         }
-            //     }]
-            // }]
+            $or: [{
+                $and: [{
+                    userId: this.userId
+                }, {
+                    userId: {
+                        $exists: true
+                    }
+                }]
+            }]
         };
 
-        return Game.find(/*selector*/);
+        return Game.find(selector);
     });
 }
