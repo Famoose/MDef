@@ -1,7 +1,7 @@
 
 @font-face {
-    font-family: chocolatte;
-    src: url(fonts/DKChocolatte.otf);
+    font-family: myfont;
+    src: url(fonts/HomeRem.ttf);
 }
 
 nav ul a,
@@ -92,9 +92,8 @@ nav{
     padding-top: 4px;
 }
 .logo-text{
-    font-family: chocolatte;
+    font-family: myfont;
     font-size: 2.8em !important;
-    top: -5px !important;
 }
 .input-normal:focus{
     border-bottom: 1px solid #333 !important;
