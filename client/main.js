@@ -65,6 +65,9 @@ function run($rootScope, $state) {
             if(error === 'LOGGED_IN'){
                 $state.go('profile');
             }
+            if(error === 'ADMIN_REQUIRED'){
+                $state.go('profile');
+            }
         }
     );
 }
