@@ -13,9 +13,13 @@ import adminCharacteristic from '../imports/ui/components/admin.characteristic/a
 import adminCategory from '../imports/ui/components/admin.category/admin.category';
 import adminQuestion from '../imports/ui/components/admin.question/admin.question';
 import adminQuestionDetails from '../imports/ui/components/admin.question.details/admin.question.details';
+import adminUsers from '../imports/ui/components/admin.users/admin.users.js';
+import adminEvaluation from '../imports/ui/components/admin.evaluation/admin.evaluation.js';
 import play from "../imports/ui/components/play/play.js";
 import playChooseCategory from "../imports/ui/components/play/chooseCategory/chooseCategory.js";
 import playAnswerQuestion from "../imports/ui/components/play/answerQuestion/answerQuestion.js";
+
+import {CategoryUser} from "../imports/service/CategoryUser.js";
 
 angular.module('pfinder', [
     angularMeteor,
@@ -30,11 +34,14 @@ angular.module('pfinder', [
     adminCategory.name,
     adminQuestion.name,
     adminQuestionDetails.name,
+    adminUsers.name,
+    adminEvaluation.name,
     play.name,
     playChooseCategory.name,
     playAnswerQuestion.name
 
-]).config(['$locationProvider', '$urlRouterProvider',config]).run(['$rootScope', '$state',run]);
+]).service("CategoryUser",CategoryUser)
+    .config(['$locationProvider', '$urlRouterProvider',config]).run(['$rootScope', '$state',run]);
 
 function onReady() {
     angular.bootstrap(document, [

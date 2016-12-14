@@ -10,6 +10,8 @@ aldeed:schema-index@1.1.1
 aldeed:simple-schema@1.5.3
 allow-deny@1.0.5
 angular-templates@1.0.9
+angular:angular@1.5.3_1
+angular:angular-resource@1.5.3_1
 autoupdate@1.2.11
 babel-compiler@6.9.1_1
 babel-runtime@0.1.11_1
@@ -54,6 +56,7 @@ materialize:materialize@0.97.7
 mdg:validation-error@0.2.0
 meteor@1.2.17_1
 meteor-base@1.0.4
+meteorhacks:picker@1.0.3
 minifier-css@1.2.14_1
 minifier-js@1.2.14_1
 minimongo@1.0.17

@@ -9,10 +9,11 @@ import Chart from "chart.js";
 import templateUrl from './profile.html';
 
 class Profile {
-    constructor($scope) {
+    constructor($scope,CategoryUser) {
         $scope.viewModel(this);
-
+        this.CategoryUser=CategoryUser
         var self=this;
+        
 
         this.helpers({
             characteristics() {
@@ -50,34 +51,12 @@ class Profile {
             var labels = [];
             var characteristics = this.characteristics;
 
-            var dataHolder={};
-
             if (category === undefined || !category) {
                 category = self.categories[0];
             }
             if (category !== undefined || !category) {
-                for (var x = 0; x < characteristics.length; x++) {
-                    labels.push(characteristics[x].characteristic);
-                    dataHolder[characteristics[x]._id] = {factor: 0, value: 0};
-                }
-                var questions = Questions.find({categoryId: category._id}).fetch();
-                for (var i = 0; i < questions.length; i++) {
-                    var question = questions[i];
-
-                    var answers = Answers.find({questionId: question._id, userId: Meteor.userId()}).fetch();
-
-
-                    for (var u = 0; u < answers.length; u++) {
-                        var answer = answers[u];
-                        for (var x = 0; x < characteristics.length; x++) {
-                            var questionCharacteristic = QuestionsCharacteristics.findOne({questionId: question._id, characteristicId: characteristics[x]._id});
-                            console.log("Characteristic:" + characteristics[x].characteristic + " -> Question:" + question.question + " -> Einfluss " + questionCharacteristic.influence +
-                                " -> Answer: " + answer.answer);
-                            dataHolder[questionCharacteristic.characteristicId].factor += questionCharacteristic.influence / 100;
-                            dataHolder[questionCharacteristic.characteristicId].value += (answer.answer * questionCharacteristic.influence) / 100;
-                        }
-                    }
-                }
+                var dataHolder= self.CategoryUser.generateDataholder();
+                self.CategoryUser.get(category,Meteor.userId(),dataHolder);
                 var datasets = [];
                 var dataset = {
                     label: category.category,
@@ -90,12 +69,14 @@ class Profile {
                 };
                 dataset.data = [];
                 for (var i = 0; i < characteristics.length; i++) {
-                    dataset.data.push((dataHolder[characteristics[i]._id].value / dataHolder[characteristics[i]._id].factor)/10*10);
+                    labels.push(characteristics[i].characteristic);
+                    dataset.data.push((dataHolder[characteristics[i]._id].value / dataHolder[characteristics[i]._id].factor).toFixed(2));
                 }
                 datasets.push(dataset);
 
                 Chart.defaults.global.legend.display = false;
                 Chart.defaults.global.defaultFontSize = 10;
+
                 var ctx = $("#chart");
                 if(self.chart===undefined)
                 {
@@ -143,7 +124,7 @@ export default angular.module(name, [
 ])
     .component(name, {
         templateUrl,
-        controller: ['$scope', Profile]
+        controller: ['$scope','CategoryUser',Profile]
     })
     .config(['$stateProvider', config]);
 
