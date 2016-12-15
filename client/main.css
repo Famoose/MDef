@@ -122,9 +122,31 @@ nav{
 .noUi-origin{
     width:100%!important;
 }
-.noUi-base
+.noUi-base {
+    background-color: #333;
+}
+.arrow-up
 {
-    background-color: #1e5293;
+    position: absolute;
+    top:30%;
+    left:50%;
+    margin-left:-40px;
+    margin-top: -40px;
+    font-size: 80px !important;
+}
+.arrow-down
+{
+    position: absolute;
+    top:70%;
+    left:50%;
+    margin-left:-40px;
+    margin-top: -40px;
+    color:#fff;
+    font-size: 80px !important;
+}
+.questionHeader
+{
+    text-align: center;
 }
 .noUi-connect{
     background-color: #FAFAFA!important;

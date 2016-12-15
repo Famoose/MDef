@@ -48,7 +48,7 @@ class AnswerQuestion {
 
         if(slider.noUiSlider===undefined) {
             noUiSlider.create(slider, {
-                start: 0,
+                start: 5,
                 direction: 'rtl',
                 connect: [false, true],
                 orientation: 'vertical',
@@ -61,6 +61,10 @@ class AnswerQuestion {
             slider.noUiSlider.on('change', function(){
                 callback(slider.noUiSlider.get());
             });
+            slider.noUiSlider.on('start',function(){
+                $(".arrow-up").remove();
+                $('.arrow-down').remove();
+            });
             $(slider).css("height",window.screen.height - window.screen.height/12 - $("nav").height() -100);
             window.addEventListener('resize', function() {
                 $(slider).css("height", window.screen.height -window.screen.height/12 - $("nav").height() -100);
@@ -69,12 +73,14 @@ class AnswerQuestion {
         var title=$('#slider').find('.noUi-connect').find("h5");
         if(title===undefined || !title.length)
         {
-            $('#slider').find('.noUi-connect').append("<h5 style='padding:10px'>"+question+"</h5>");
+            $('#slider').find('.noUi-connect').append("<h5 style='padding:10px' class='questionHeader'>"+question+"</h5>");
         }
         else
         {
             title.text(question);
         }
+        $('#slider').find('.noUi-base').append("<i class='arrow-up material-icons'>keyboard_arrow_up</i>");
+        $('#slider').find('.noUi-base').append("<i class='arrow-down material-icons'>keyboard_arrow_down</i>");
     }
 }
 const name = 'playAnswerQuestion';

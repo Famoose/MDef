@@ -48,6 +48,7 @@ class Profile {
         if (self.categoriesSubHandler.ready() && self.answersSubHandler.ready() && self.questionsSubHandler.ready()
             && self.questionsCharacteristicsSubHandler.ready() && self.characteristicsSubHandler.ready()) {
 
+            $('.collapsible').collapsible();
             var labels = [];
             var characteristics = this.characteristics;
 
