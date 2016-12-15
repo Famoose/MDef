@@ -14,7 +14,7 @@ var QuestionsCharacteristicsSchema = new SimpleSchema({
     influence:{
         type: Number,
         label: "Einflusswert",
-        min:0,
+        min:-100,
         max:100
     }
 });
