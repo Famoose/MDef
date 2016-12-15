@@ -17,7 +17,7 @@ class AdminQuestionDetails {
 
         this.$state = $state;
         this.$timeout = $timeout;
-
+        this.question = Questions.findOne({_id: this.$state.params.questionId});
         this.helpers({
             questionsCharacteristics(){
                 return QuestionsCharacteristics.find({questionId: this.$state.params.questionId}, {
@@ -39,9 +39,7 @@ class AdminQuestionDetails {
     }
 
     back() {
-        var question = Questions.findOne({_id: this.$state.params.questionId});
-
-        this.$state.go('admin-question', {catId: question.categoryId});
+        this.$state.go('admin-question', {catId: this.question.categoryId});
     }
 }
 const name = 'adminQuestionDetails';
