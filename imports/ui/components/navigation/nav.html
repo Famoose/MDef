@@ -13,6 +13,7 @@
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="login" ng-click="$ctrl.logout()">Logout</a></li>
             <li ng-show="!$ctrl.isLoggedIn"><a ui-sref="register">Register</a></li>
             <li ng-show="!$ctrl.isLoggedIn"><a ui-sref="login">Login</a></li>
+            <li><a ui-sref="impressum">Impressum</a></li>
         </ul>
         <ul id="nav-mobile" class="side-nav">
             <li>
@@ -26,6 +27,7 @@
             <li ng-show="$ctrl.isLoggedIn"><a ng-click="$ctrl.logout()">Logout</a></li>
             <li ng-show="!$ctrl.isLoggedIn"><a ui-sref="register">Register</a></li>
             <li ng-show="!$ctrl.isLoggedIn"><a ui-sref="login">Login</a></li>
+            <li><a ui-sref="impressum">Impressum</a></li>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
