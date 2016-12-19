@@ -66,6 +66,9 @@ function config($locationProvider, $urlRouterProvider) {
 }
 
 function run($rootScope, $state) {
+    $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
+        $('.side-nav').sideNav('hide');
+    });
     $rootScope.$on('$stateChangeError',
         (event, toState, toParams, fromState, fromParams, error) => {
             if (error === 'AUTH_REQUIRED') {

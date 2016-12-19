@@ -28,7 +28,7 @@ class AnswerQuestion {
                     if(game.questionIndex==sumOfQuestions)
                     {
                         Game.update({_id:game._id},{$set:{isPlaying: false}});
-                        $state.go("profile");
+                        $state.go("profile",{catId:game.categoryId});
                     }
                     else {
                         Game.update({_id:game._id},{$set:{questionIndex: game.questionIndex+1}});
@@ -64,6 +64,10 @@ class AnswerQuestion {
             slider.noUiSlider.on('start',function(){
                 $(".arrow-up").remove();
                 $('.arrow-down').remove();
+                changeQuestionValue();
+            });
+            slider.noUiSlider.on('slide',function(){
+                changeQuestionValue();
             });
             $(slider).css("height",window.screen.height - window.screen.height/12 - $("nav").height() -100);
             window.addEventListener('resize', function() {
@@ -73,7 +77,9 @@ class AnswerQuestion {
         var title=$('#slider').find('.noUi-connect').find("h5");
         if(title===undefined || !title.length)
         {
+            $("#slider").find('.noUi-base').append("<h5 class='question-value'></h5>")
             $('#slider').find('.noUi-connect').append("<h5 style='padding:10px' class='questionHeader'>"+question+"</h5>");
+
         }
         else
         {
@@ -81,6 +87,39 @@ class AnswerQuestion {
         }
         $('#slider').find('.noUi-base').append("<i class='arrow-up material-icons'>keyboard_arrow_up</i>");
         $('#slider').find('.noUi-base').append("<i class='arrow-down material-icons'>keyboard_arrow_down</i>");
+
+        function changeQuestionValue(){
+            var slider=document.getElementById("slider");
+            var value=slider.noUiSlider.get();
+
+            if(value <= 2)
+            {
+                $(".question-value").text("Trifft nicht zu");
+            }
+            else if(value <=4)
+            {
+                $(".question-value").text("Trifft weniger zu");
+            }
+            else if(value <= 6)
+            {
+                $(".question-value").text("Trifft manchmal zu");
+            }
+            else if(value <=8){
+                $(".question-value").text("Trifft zu");
+            }
+            else if(value <=10)
+            {
+                $(".question-value").text("Trifft genau zu");
+            }
+            if(value >=5)
+            {
+                $(".question-value").css("color","#fff");
+            }
+            else
+            {
+                $(".question-value").css("color","#000");
+            }
+        }
     }
 }
 const name = 'playAnswerQuestion';
