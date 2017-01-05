@@ -5,6 +5,9 @@ export const Characteristics = new Mongo.Collection('characteristics');
 var CharacteristicsSchema = new SimpleSchema({
     characteristic: {
         type: String,
+    },
+    description:{
+        type:String
     }
 });
 

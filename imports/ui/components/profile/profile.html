@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col m4 s12">
                 <div class="collection" style="margin: 0;">
-                    <a class="collection-item black-text"
-                       ng-repeat="category in $ctrl.categories" ng-click="$ctrl.setCategory(category)" style="cursor: pointer">{{category.category}}</a>
+                    <a class="collection-item collection-normal"
+                       ng-repeat="category in $ctrl.categories" ng-class="{'active':$ctrl.isActive(category)}" ng-click="$ctrl.setCategory(category)" style="cursor: pointer">{{category.category}}</a>
                 </div>
             </div>
             <div class="col m8 s12">
@@ -12,6 +12,17 @@
                     <div class="chart-container">
                         <canvas id="chart" width="400" height="400"></canvas>
                     </div>
+                </div>
+            </div>
+            <div class="col s12">
+                <div class="card-content">
+                    <h4>Beschreibung</h4>
+                    <ul class="collapsible" data-collapsible="accordion" style="margin:0">
+                        <li ng-repeat="characteristic in $ctrl.characteristics">
+                            <div class="collapsible-header"><i class="material-icons">person_pin</i>{{characteristic.characteristic}}</div>
+                            <div class="collapsible-body white-text" style="background-color:#333;"><p>{{characteristic.description}}</p></div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

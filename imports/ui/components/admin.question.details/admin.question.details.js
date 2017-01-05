@@ -5,53 +5,50 @@ import noUiSlider from 'nouislider';
 import {Characteristics} from  '../../../api/characteristics/index.js';
 import {QuestionsCharacteristics} from '../../../api/questions-characteristcs/index.js';
 import {Questions} from '../../../api/questions/index.js';
-import { Template } from 'meteor/templating';
+import {Template} from 'meteor/templating';
 
 class AdminQuestionDetails {
-    constructor($scope,$state,$timeout) {
+    constructor($scope, $state, $timeout) {
         $scope.viewModel(this);
 
         Meteor.subscribe('characteristics');
         Meteor.subscribe('questions');
         Meteor.subscribe('questionsCharacteristics');
 
-        this.$state=$state;
-        this.$timeout=$timeout;
-
+        this.$state = $state;
+        this.$timeout = $timeout;
+        this.question = Questions.findOne({_id: this.$state.params.questionId});
         this.helpers({
             questionsCharacteristics(){
-              return QuestionsCharacteristics.find({questionId: this.$state.params.questionId},{
-                  sort:{
-                      characteristicId:1
-                  }
-              });
+                return QuestionsCharacteristics.find({questionId: this.$state.params.questionId}, {
+                    sort: {
+                        characteristicId: 1
+                    }
+                });
             }
         });
 
     }
-    getCharacteristic(characteristicId)
-    {
-        return Characteristics.findOne({_id:characteristicId}).characteristic;
-    }
-    updateInfluenceValue(questionsCharacteristic)
-    {
-        QuestionsCharacteristics.update({_id:questionsCharacteristic._id},{$set:{"influence":questionsCharacteristic.influence}});
-    }
-    back()
-    {
-        var question=Questions.findOne({_id:this.$state.params.questionId});
 
-        this.$state.go('admin-question',{catId:question.categoryId});
+    getCharacteristic(characteristicId) {
+        return Characteristics.findOne({_id: characteristicId}).characteristic;
+    }
+
+    updateInfluenceValue(questionsCharacteristic) {
+        QuestionsCharacteristics.update({_id: questionsCharacteristic._id}, {$set: {"influence": questionsCharacteristic.influence}});
+    }
+
+    back() {
+        this.$state.go('admin-question', {catId: this.question.categoryId});
     }
 }
 const name = 'adminQuestionDetails';
 
 // create a module
-export default angular.module(name, [
-])
+export default angular.module(name, [])
     .component(name, {
         templateUrl,
-        controller: ['$scope','$state','$timeout', AdminQuestionDetails]
+        controller: ['$scope', '$state', '$timeout', AdminQuestionDetails]
     })
     .config(['$stateProvider', config]);
 
@@ -64,6 +61,8 @@ function config($stateProvider) {
                 error: ['$q', function currentUser($q) {
                     if (Meteor.userId() === null) {
                         return $q.reject('AUTH_REQUIRED');
+                    } else if (!Roles.userIsInRole(Meteor.userId(), ["admin"], "default-group")) {
+                        return $q.reject('ADMIN_REQUIRED');
                     } else {
                         return $q.resolve();
                     }

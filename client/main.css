@@ -108,23 +108,66 @@ nav{
     border: none;
 }
 
+.collection-normal{
+    color: #333333 !important;
+}
+.collection-normal:active, .collection .collection-item.active{
+    background-color: #333333 !important;
+    color: white !important;
+
+}
 .noUi-handle{
-    width:40px!important;
+    width:70px!important;
+    height:50px !important;
     left:50%!important;
-    border-radius: 20px!important;
-    margin-left: -20px!important;
+    border-radius: 35px!important;
+    margin-left: -35px!important;
+    margin-top: -5px!important;
 }
 .noUi-handle:before, .noUi-handle:after{
     width: 30px!important;
     left: 50%!important;
     margin-left: -15px!important;
+    margin-top: 5px !important;
 }
 .noUi-origin{
     width:100%!important;
 }
-.noUi-base
+.noUi-base {
+    background-color: #333;
+}
+.arrow-up
 {
-    background-color: #1e5293;
+    position: absolute;
+    top:30%;
+    left:50%;
+    margin-left:-40px;
+    margin-top: -40px;
+    font-size: 80px !important;
+}
+.arrow-down
+{
+    position: absolute;
+    top:70%;
+    left:50%;
+    margin-left:-40px;
+    margin-top: -40px;
+    color:#fff;
+    font-size: 80px !important;
+}
+.question-value
+{
+    position: absolute;
+    width:100%;
+    text-align: center;
+    height:40px;
+    line-height: 40px;
+    top:50%;
+    margin-top: -20px;
+}
+.questionHeader
+{
+    text-align: center;
 }
 .noUi-connect{
     background-color: #FAFAFA!important;

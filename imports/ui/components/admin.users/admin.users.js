@@ -39,6 +39,8 @@ function config($stateProvider) {
                 error: ['$q', function currentUser($q) {
                     if (Meteor.userId() === null) {
                         return $q.reject('AUTH_REQUIRED');
+                    }  else if (!Roles.userIsInRole(Meteor.userId(), ["admin"], "default-group")) {
+                        return $q.reject('ADMIN_REQUIRED');
                     } else {
                         return $q.resolve();
                     }

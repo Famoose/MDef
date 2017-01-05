@@ -5,11 +5,12 @@
                 <h4>Erstellen</h4>
                 <form name="newCharacteristic" ng-submit="newCharacteristic.$valid && $ctrl.add({characteristic: $ctrl.newCharacteristic});">
                     <div class="input-field row">
-                        <input class="iinput-normal col s8 m10 l10" placeholder="Charakteristik"
+                        <input class="input-normal col s12" placeholder="Charakteristik"
                                ng-model="$ctrl.newCharacteristic" ng-required="true">
+                        <textarea class="materialize-textarea input-normal col m8 m10 l10" placeholder="Beschreibung" ng-required="true" ng-model="$ctrl.characteristicDescription"></textarea>
                         <div class="s4 m2 l2 center-align">
                             <button class="btn btn-large" type="submit"
-                                    ng-click="$ctrl.add({characteristic: $ctrl.newCharacteristic});">
+                                    ng-click="$ctrl.add({characteristic: $ctrl.newCharacteristic,description:$ctrl.characteristicDescription});">
                                 <i class="material-icons">note_add</i>
                             </button>
                         </div>
@@ -26,6 +27,8 @@
                     <div class="input-field row">
                         <input class="input-normal col s8 m10 l10" placeholder="Charakteristik"
                                ng-model="characteristic.characteristic" ng-change="$ctrl.update(characteristic)">
+                        <textarea class="materialize-textarea input-normal col m8 m10 l10" placeholder="Beschreibung" ng-required="true" ng-model="characteristic.description"
+                        ng-change="$ctrl.update(characteristic)"></textarea>
                         <div class="s4 m2 l2 center-align">
                             <button class="btn btn-large"
                                     ng-click="$ctrl.remove(characteristic)">

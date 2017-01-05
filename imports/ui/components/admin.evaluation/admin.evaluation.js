@@ -1,20 +1,31 @@
 import {Meteor} from 'meteor/meteor';
 
 import templateUrl from './admin.evaluation.html';
+import {Answers} from '../../../api/answer/index.js';
+import {QuestionsCharacteristics} from '../../../api/questions-characteristcs/index.js';
+import {Questions} from '../../../api/questions/index.js';
 import {Categories} from '../../../api/categories/index.js';
+import {Characteristics} from '../../../api/characteristics/index.js';
 
 class AdminEvaluation {
     constructor($scope,$state,CategoryUser) {
         $scope.viewModel(this);
 
+        this.CategoryUser=CategoryUser;
         this.$state = $state;
 
         var self=this;
 
-        var categoriesHandler=self.Meteor.subscribe('categories',generate());
-        var usersHandler=self.Meteor.subscribe('users',generate());
+        self.colors=["#333","#1e5293","red","blue","yellow"];
 
         this.helpers({
+            characteristics() {
+                return Characteristics.find({}, {
+                    sort: {
+                        characteristic: 1
+                    }
+                });
+            },
             categories() {
                 return Categories.find({}, {
                     sort: {
@@ -23,46 +34,66 @@ class AdminEvaluation {
                 });
             },
             user(){
-                return Meteor.users.findOne({_id: self.$state.params.uid}, {fields: {emails: 1, profile: 1}})
+                return Meteor.users.findOne({_id: self.$state.params.uid}, {fields: {_id:1,emails: 1, profile: 1}})
             }
         });
 
+        self.categoriesHandler=Meteor.subscribe('categories',generate);
+        self.usersHandler=Meteor.subscribe('users',generate);
+        self.characteristicsHandler=Meteor.subscribe('characteristics',generate);
+        self.answersSubHandler=Meteor.subscribe('answers',generate);
+        self.questionsSubHandler=Meteor.subscribe('questions',generate);
+        self.questionsCharacteristicsSubHandler=Meteor.subscribe('questionsCharacteristics',generate);
 
         function generate()
         {
-            if(categoriesHandler.ready() && usersHandler.ready())
+            if(self.categoriesHandler.ready() && self.usersHandler.ready() && self.characteristicsHandler.ready()
+            && self.answersSubHandler.ready() && self.questionsSubHandler.ready() && self.questionsCharacteristicsSubHandler.ready())
             {
+                var categories=self.categories;
+                var characteristics=self.characteristics;
+                var labels=[];
                 var data = {
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
-                    datasets: [
-                        {
-                            label: "My First dataset",
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255,99,132,1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1,
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                        }
-                    ]
+                    labels: labels,
+                    datasets: []
                 };
-                var ctx=
-                var myBarChart = new Chart(ctx, {
+                for(var i=0; i<categories.length; i++)
+                {
+                    var category=categories[i];
+                    var chartData=[];
+                    var dataset={};
+
+                    var dataHolder= self.CategoryUser.generateDataholder();
+                    self.CategoryUser.get(category,self.user._id,dataHolder);
+                    dataset.label=category.category;
+                    for(var j=0; j<characteristics.length; j++)
+                    {
+                        if(labels.length!=characteristics.length)
+                        {
+                            labels.push(characteristics[j].characteristic);
+                        }
+                        chartData.push((dataHolder[characteristics[j]._id].value / dataHolder[characteristics[j]._id].factor).toFixed(2));
+                    }
+                    dataset.data=chartData;
+                    dataset.borderWidth=1;
+                    dataset.backgroundColor=self.colors[i];
+                    data.datasets.push(dataset);
+                }
+                new Chart($("#chart-holder"), {
                     type: 'bar',
                     data: data,
-                    options: []
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    suggestedMax: 10,
+                                    suggestedMin: 0,
+                                    stepSize: 1
+                                }
+                            }],
+                        }
+                    },
                 });
             }
         }

@@ -29,6 +29,7 @@ class AdminCharacteristic {
     add(characteristic) {
         Characteristics.insert(characteristic);
         this.newCharacteristic = null;
+        this.characteristicDescription = null;
     }
 }
 const name = 'adminCharacteristic';
@@ -51,6 +52,8 @@ function config($stateProvider) {
                 error: ['$q', function currentUser($q) {
                     if (Meteor.userId() === null) {
                         return $q.reject('AUTH_REQUIRED');
+                    } else if (!Roles.userIsInRole(Meteor.userId(), ["admin"], "default-group")) {
+                        return $q.reject('ADMIN_REQUIRED');
                     } else {
                         return $q.resolve();
                     }

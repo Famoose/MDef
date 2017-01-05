@@ -9,10 +9,15 @@ import Chart from "chart.js";
 import templateUrl from './profile.html';
 
 class Profile {
-    constructor($scope,CategoryUser) {
+    constructor($scope, $state, CategoryUser) {
+
         $scope.viewModel(this);
-        this.CategoryUser=CategoryUser
+        this.CategoryUser=CategoryUser;
+        this.$state=$state;
+
+
         var self=this;
+
         
 
         this.helpers({
@@ -33,11 +38,25 @@ class Profile {
         });
 
         self.characteristicsSubHandler=Meteor.subscribe('characteristics',generate);
-        self.categoriesSubHandler=Meteor.subscribe('categories',generate);
+        self.categoriesSubHandler=Meteor.subscribe('categories',setCategory);
         self.answersSubHandler=Meteor.subscribe('answers',generate);
         self.questionsSubHandler=Meteor.subscribe('questions',generate);
         self.questionsCharacteristicsSubHandler=Meteor.subscribe('questionsCharacteristics',generate);
 
+        function setCategory()
+        {
+            if("" !== self.$state.params.catId){
+                var category=Categories.findOne({"_id": self.$state.params.catId});
+                $scope.$apply(function() {
+                    self.activeCategory = category;
+                });
+            }else{
+                $scope.$apply(function(){
+                    self.activeCategory = self.categories[0];
+                });
+            }
+            self.generateRadar(self);
+        }
         function generate()
         {
             self.generateRadar(self);
@@ -48,11 +67,12 @@ class Profile {
         if (self.categoriesSubHandler.ready() && self.answersSubHandler.ready() && self.questionsSubHandler.ready()
             && self.questionsCharacteristicsSubHandler.ready() && self.characteristicsSubHandler.ready()) {
 
+            $('.collapsible').collapsible();
             var labels = [];
             var characteristics = this.characteristics;
 
             if (category === undefined || !category) {
-                category = self.categories[0];
+                category = self.activeCategory;
             }
             if (category !== undefined || !category) {
                 var dataHolder= self.CategoryUser.generateDataholder();
@@ -116,6 +136,16 @@ class Profile {
     {
         var self=this;
         self.generateRadar(self,category);
+        self.activeCategory = category;
+    }
+    isActive(category)
+    {
+        var self=this;
+        if(self.activeCategory!==undefined)
+        {
+            return self.activeCategory._id === category._id;
+        }
+        return false;
     }
 }
 const name = 'profile';
@@ -124,14 +154,14 @@ export default angular.module(name, [
 ])
     .component(name, {
         templateUrl,
-        controller: ['$scope','CategoryUser',Profile]
+        controller: ['$scope','$state','CategoryUser',Profile]
     })
     .config(['$stateProvider', config]);
 
 function config($stateProvider) {
     $stateProvider
         .state('profile', {
-            url: '/profile',
+            url: '/profile/:catId',
             template: '<profile></profile>',
             resolve: {
                 error: ['$q', function currentUser($q) {

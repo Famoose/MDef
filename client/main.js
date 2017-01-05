@@ -4,6 +4,7 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
 import login from '../imports/ui/components/login/login';
+import impressum from '../imports/ui/components/impressum/impressum';
 import nav from '../imports/ui/components/navigation/nav';
 import question from '../imports/ui/components/question/question';
 import profile from '../imports/ui/components/profile/profile';
@@ -38,7 +39,8 @@ angular.module('pfinder', [
     adminEvaluation.name,
     play.name,
     playChooseCategory.name,
-    playAnswerQuestion.name
+    playAnswerQuestion.name,
+    impressum.name
 
 ]).service("CategoryUser",CategoryUser)
     .config(['$locationProvider', '$urlRouterProvider',config]).run(['$rootScope', '$state',run]);
@@ -64,12 +66,18 @@ function config($locationProvider, $urlRouterProvider) {
 }
 
 function run($rootScope, $state) {
+    $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
+        $('.side-nav').sideNav('hide');
+    });
     $rootScope.$on('$stateChangeError',
         (event, toState, toParams, fromState, fromParams, error) => {
             if (error === 'AUTH_REQUIRED') {
                 $state.go('login');
             }
             if(error === 'LOGGED_IN'){
+                $state.go('profile');
+            }
+            if(error === 'ADMIN_REQUIRED'){
                 $state.go('profile');
             }
         }
