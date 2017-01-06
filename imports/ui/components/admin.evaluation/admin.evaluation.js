@@ -72,7 +72,14 @@ class AdminEvaluation {
                         {
                             labels.push(characteristics[j].characteristic);
                         }
-                        chartData.push((dataHolder[characteristics[j]._id].value / dataHolder[characteristics[j]._id].factor).toFixed(2));
+                        if(dataHolder[characteristics[j]._id].factor == 0 && dataHolder[characteristics[j]._id].value ==0)
+                        {
+                            chartData.push(0);
+                        }
+                        else
+                        {
+                            chartData.push((dataHolder[characteristics[j]._id].value / dataHolder[characteristics[j]._id].factor).toFixed(2));
+                        }
                     }
                     dataset.data=chartData;
                     dataset.borderWidth=1;
