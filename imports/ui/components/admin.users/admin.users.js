@@ -39,12 +39,12 @@ class AdminUsers {
 
         self.colors=["#333","#1e5293","red","blue","yellow"];
 
-        self.categoriesHandler=Meteor.subscribe('categories',generate);
-        self.usersHandler=Meteor.subscribe('users',generate);
-        self.characteristicsHandler=Meteor.subscribe('characteristics',generate);
-        self.answersSubHandler=Meteor.subscribe('answers',generate);
-        self.questionsSubHandler=Meteor.subscribe('questions',generate);
-        self.questionsCharacteristicsSubHandler=Meteor.subscribe('questionsCharacteristics',generate);
+        self.categoriesHandler=Meteor.subscribe('categories');
+        self.usersHandler=Meteor.subscribe('users');
+        self.characteristicsHandler=Meteor.subscribe('characteristics');
+        self.answersSubHandler=Meteor.subscribe('answers');
+        self.questionsSubHandler=Meteor.subscribe('questions');
+        self.questionsCharacteristicsSubHandler=Meteor.subscribe('questionsCharacteristics');
 
         function generate()
         {
