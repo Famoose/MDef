@@ -14,6 +14,14 @@ class Register {
         };
 
         this.error = '';
+        $(document).ready(function() {
+            $('select').material_select();
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 120, // Creates a dropdown of 15 years to control year
+                max: new Date()
+            });
+        });
     }
 
     register() {
@@ -36,6 +44,7 @@ class Register {
             })
         );
     }
+
 }
 const name = 'register';
 // create a module
