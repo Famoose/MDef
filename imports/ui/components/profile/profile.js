@@ -14,6 +14,7 @@ class Profile {
         $scope.viewModel(this);
         this.CategoryUser=CategoryUser;
         this.$state=$state;
+        this.userId = Meteor.userId();
 
 
         var self=this;
@@ -36,12 +37,17 @@ class Profile {
                 })
             }
         });
+        self.userTestSubHandler = Meteor.subscribe('Meteor.users.test', userTest);
 
         self.characteristicsSubHandler=Meteor.subscribe('characteristics',generate);
         self.categoriesSubHandler=Meteor.subscribe('categories',setCategory);
         self.answersSubHandler=Meteor.subscribe('answers',generate);
         self.questionsSubHandler=Meteor.subscribe('questions',generate);
         self.questionsCharacteristicsSubHandler=Meteor.subscribe('questionsCharacteristics',generate);
+
+        function userTest(){
+            console.log(Meteor.users.find({"_id": Meteor.userId()}, {fields: {_id: 1}}).fetch());
+        }
 
         function setCategory()
         {

@@ -1,19 +1,33 @@
 <div class="container login-container row">
-    <form class="col offset-m3 m6 offset-s1 s10" name="register" ng-submit="register.$valid && $ctrl.register()" novalidate>
+    <form class="col offset-m3 m6 offset-s1 s10" name="register" ng-submit="register.$valid && $ctrl.register()"
+          novalidate>
         <div class="row">
-            <div class="input-field col s12"><input placeholder="Email" ng-model="$ctrl.credentials.email" class="input-login validate" type="email"></div>
-            <div class="input-field col s12"><input placeholder="Password" ng-model="$ctrl.credentials.password" class="input-login validate" type="password"></div>
-            <div class="input-field col s6">
-                <select class="input-login">
+            <div class="input-field col s12"><input placeholder="Email" ng-model="$ctrl.credentials.email"
+                                                    class="input-login validate" type="email"></div>
+            <div class="input-field col s12"><input placeholder="Password" ng-model="$ctrl.credentials.password"
+                                                    class="input-login validate" type="password"></div>
+            <div class="input-field col s12 m4">
+                <select class="input-login" ng-model="$ctrl.credentials.test.gender">
                     <option value="" disabled selected>Geschlecht</option>
-                    <option value="1">Weiblich</option>
-                    <option value="2">Männlich</option>
+                    <option value="Weiblich">Weiblich</option>
+                    <option value="Männlich">Männlich</option>
                 </select>
             </div>
 
-                <input class="datepicker" type="date">
-
-            <div class="input-field col s12"><input type="submit" value="Registrieren" class="waves-effect waves-light btn-large btn-login" style="width:100%;"/></div>
+            <div class="input-field col s12 m8">
+                <input type="checkbox" ng-model="$ctrl.credentials.test.leader" id="leader" />
+                <label for="leader" class="switch-title">Führungsverantwortung</label>
+            </div>
+            <div class="input-field col s12">
+                <input ng-model="$ctrl.credentials.test.birth" class="datepicker input-login validate" type="text">
+            </div>
+            <div class="input-field col s12"><input placeholder="Beruf" ng-model="$ctrl.credentials.test.job"
+                                                    class="input-login validate" type="text"></div>
+            <div class="input-field col s12">
+                <input type="submit" value="Registrieren"
+                       class="waves-effect waves-light btn-large btn-login"
+                       style="width:100%;"/>
+            </div>
         </div>
     </form>
 </div>

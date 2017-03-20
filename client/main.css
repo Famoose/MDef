@@ -62,7 +62,7 @@ nav{
 .btn-large:focus{
     background-color: #333333 !important;
 }
-.btn-flat{
+.btn-flat-custom{
     font-weight: bold;
     color: white;
     font-size: 1.5em;
@@ -174,4 +174,10 @@ nav{
 }
 .collection-header h4{
     display: inline-block;
+}
+
+.switch-title{
+    font-weight: bold;
+    color: white !important;
+    font-size: 1.5em !important;
 }
