@@ -20,3 +20,10 @@ Meteor.startup(() => {
         Roles.addUsersToRoles(id, ['admin'], 'default-group');
     }
 });
+
+if(Meteor.isServer){
+    Accounts.onCreateUser((options, user) => {
+        user.personal = options.personal;
+        return user;
+    });
+}

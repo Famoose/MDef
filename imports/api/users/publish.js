@@ -20,7 +20,7 @@ if (Meteor.isServer) {
 
         // Only return one field, `initials`
         const options = {
-            fields: { test: 1 }
+            fields: { personal: 1 }
         };
 
         return Meteor.users.find(selector, options);

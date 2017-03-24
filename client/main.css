@@ -38,11 +38,11 @@ nav{
     background-color: #333;
 }
 .login-container{
-    margin-top: 15%;
+    margin-top: 5%;
 }
 @media only screen and (max-width : 600px) {
     .login-container{
-        margin-top: 25%;
+        margin-top: 5%;
     }
 }
 .btn-bold{

@@ -11,7 +11,9 @@ class Register {
         this.credentials = {
             email: '',
             password: '',
-            test: {
+            personal: {
+                firstname: '',
+                lastname: '',
                 gender: '',
                 leader: '',
                 birth: '',
