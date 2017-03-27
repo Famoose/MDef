@@ -2,7 +2,6 @@ import {Meteor} from 'meteor/meteor';
 
 import templateUrl from './chooseCategory.html';
 import {Game} from '../../../../api/game/index.js';
-import {Categories} from '../../../../api/categories/index.js';
 
 class ChooseCategory {
     constructor($scope,$state) {

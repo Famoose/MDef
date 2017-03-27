@@ -3,10 +3,10 @@
  */
 import { Meteor } from 'meteor/meteor';
 
-import { Characteristics } from './collection';
+import { Energietyp } from './collection';
 
 if (Meteor.isServer) {
-    Meteor.publish('characteristics', function() {
+    Meteor.publish('energietyp', function() {
         const selector = {
             // $or: [{
             //     // when logged in user is the owner
@@ -20,6 +20,6 @@ if (Meteor.isServer) {
             // }]
         };
 
-        return Characteristics.find(/*selector*/);
+        return Energietyp.find(/*selector*/);
     });
 }

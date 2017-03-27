@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor';
-import '../imports/api/characteristics/index';
-import '../imports/api/categories/index';
+import '../imports/api/bubble/index';
+import '../imports/api/cluster/index';
+import '../imports/api/energietyp/index';
 import '../imports/api/questions/index';
-import '../imports/api/questions-characteristcs/index';
+import '../imports/api/fokus/index';
 import '../imports/api/game/index.js';
 import '../imports/api/answer/index.js';
 import '../imports/api/users/index.js';

@@ -2,10 +2,8 @@ import {Meteor} from 'meteor/meteor';
 
 import templateUrl from './admin.evaluation.html';
 import {Answers} from '../../../api/answer/index.js';
-import {QuestionsCharacteristics} from '../../../api/questions-characteristcs/index.js';
 import {Questions} from '../../../api/questions/index.js';
-import {Categories} from '../../../api/categories/index.js';
-import {Characteristics} from '../../../api/characteristics/index.js';
+
 
 class AdminEvaluation {
     constructor($scope,$state,CategoryUser) {

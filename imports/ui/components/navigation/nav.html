@@ -7,7 +7,10 @@
             </li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-category">Kategorie</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-users">Users</a></li>
-            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-characteristic">Charakteristik</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-cluster">Cluster</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-bubble">Bubble</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-fokus">Fokus</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-energietyp">Energie Typ</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="play">Spielen</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="profile">Profil</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="login" ng-click="$ctrl.logout()">Logout</a></li>
@@ -21,7 +24,10 @@
             </li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-category">Kategorie</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-users">Users</a></li>
-            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-characteristic">Charakteristik</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-cluster">Cluster</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-bubble">Bubble</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-fokus">Fokus</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-energietyp">Energie Typ</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="play">Spielen</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ui-sref="profile">Profil</a></li>
             <li ng-show="$ctrl.isLoggedIn"><a ng-click="$ctrl.logout()">Logout</a></li>
@@ -32,4 +38,3 @@
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
 </nav>
-{{$ctrl.currentUser}}

@@ -1,26 +1,27 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-export const Categories = new Mongo.Collection('categories');
+export const Fokus = new Mongo.Collection('fokus');
 
-var CategoriesSchema = new SimpleSchema({
-    category: {
+var FokusSchema = new SimpleSchema({
+    fokus: {
         type: String,
-        label: "Kategorie",
+        label: "Fokus",
         min: 0,
         max: 100
     }
+
 });
 
-Categories.attachSchema(CategoriesSchema);
+Fokus.attachSchema(FokusSchema);
 
-Categories.allow({
-    insert(userId, category) {
+Fokus.allow({
+    insert(userId, fokus) {
         return Roles.userIsInRole(userId, ["admin"], "default-group");
     },
-    update(userId, category) {
+    update(userId, step, fields, modifier) {
         return Roles.userIsInRole(userId, ["admin"], "default-group");
     },
-    remove(userId, category) {
+    remove(userId, step) {
         return Roles.userIsInRole(userId, ["admin"], "default-group");
     }
 });

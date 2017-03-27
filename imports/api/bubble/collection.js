@@ -1,25 +1,15 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-export const Questions = new Mongo.Collection('questions');
+export const Bubble = new Mongo.Collection('bubble');
 
-var QuestionsSchema = new SimpleSchema({
-    question: {
+var BubbleSchema = new SimpleSchema({
+    bubble: {
         type: String,
-        label: "Frage",
+        label: "Bubble",
         min: 0,
         max: 100
     },
-    energietypId: {
-        type: String,
-        label: "Energietyp",
-        min:0
-    },
-    fokusId:{
-        type: String,
-        label: "Fokus",
-        min:0
-    },
-    clusterId:{
+    clusterId: {
         type: String,
         label: "Cluster",
         min:0
@@ -27,10 +17,10 @@ var QuestionsSchema = new SimpleSchema({
 
 });
 
-Questions.attachSchema(QuestionsSchema);
+Bubble.attachSchema(BubbleSchema);
 
-Questions.allow({
-    insert(userId, question) {
+Bubble.allow({
+    insert(userId, bubble) {
         return Roles.userIsInRole(userId, ["admin"], "default-group");
     },
     update(userId, step, fields, modifier) {

@@ -10,15 +10,22 @@ import question from '../imports/ui/components/question/question';
 import profile from '../imports/ui/components/profile/profile';
 import register from '../imports/ui/components/register/register';
 import forgotpw from '../imports/ui/components/forgotpw/forgotpw';
-import adminCharacteristic from '../imports/ui/components/admin.characteristic/admin.characteristic';
-import adminCategory from '../imports/ui/components/admin.category/admin.category';
+
 import adminQuestion from '../imports/ui/components/admin.question/admin.question';
 import adminQuestionDetails from '../imports/ui/components/admin.question.details/admin.question.details';
 import adminUsers from '../imports/ui/components/admin.users/admin.users.js';
 import adminEvaluation from '../imports/ui/components/admin.evaluation/admin.evaluation.js';
+
+import adminBubble from '../imports/ui/components/admin.bubble/admin.bubble.js';
+import adminCluster from '../imports/ui/components/admin.cluster/admin.cluster.js';
+import adminFokus from '../imports/ui/components/admin.fokus/admin.fokus.js';
+import adminEnergieTyp from '../imports/ui/components/admin.energietyp/admin.energietyp.js';
+
 import play from "../imports/ui/components/play/play.js";
 import playChooseCategory from "../imports/ui/components/play/chooseCategory/chooseCategory.js";
 import playAnswerQuestion from "../imports/ui/components/play/answerQuestion/answerQuestion.js";
+
+import select from "../imports/ui/components/directive/select.js";
 
 import {CategoryUser} from "../imports/service/CategoryUser.js";
 
@@ -31,16 +38,19 @@ angular.module('pfinder', [
     profile.name,
     register.name,
     forgotpw.name,
-    adminCharacteristic.name,
-    adminCategory.name,
     adminQuestion.name,
     adminQuestionDetails.name,
     adminUsers.name,
     adminEvaluation.name,
+    adminBubble.name,
+    adminCluster.name,
+    adminFokus.name,
+    adminEnergieTyp.name,
     play.name,
     playChooseCategory.name,
     playAnswerQuestion.name,
-    impressum.name
+    impressum.name,
+    select.name
 
 ]).service("CategoryUser",CategoryUser)
     .config(['$locationProvider', '$urlRouterProvider',config]).run(['$rootScope', '$state',run]);

@@ -1,8 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Answers} from '../api/answer/index.js';
-import {QuestionsCharacteristics} from '../api/questions-characteristcs/index.js';
 import {Questions} from '../api/questions/index.js';
-import {Characteristics} from '../api/characteristics/index.js';
 
 
 

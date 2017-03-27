@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="section">
+        <div class="card">
+            <div class="card-content">
+                <h4>Erstellen</h4>
+                <form name="newBubble" ng-submit="newBubble.$valid && $ctrl.add({bubble: $ctrl.newBubble, clusterId:$ctrl.newCluster});">
+                    <div class="input-field row">
+                        <input class="input-normal col s8 m10 l10" placeholder="Bubble"
+                               ng-model="$ctrl.newBubble" ng-required="true">
+                        <div class="input-normal input-field col m8 m10 l10">
+                            <select ng-options="cluster._id as cluster.cluster for cluster in $ctrl.clusters" ng-model="$ctrl.newCluster">
+                            </select>
+                            <label>Cluster</label>
+                        </div>
+                        <div class="s4 m2 l2 center-align">
+                            <button class="btn btn-large" type="submit">
+                                <i class="material-icons">note_add</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>Bubbles</h4></li>
+            <li class="collection-item" ng-repeat="bubble in $ctrl.bubbles">
+                    <div class="input-field row">
+                        <input class="input-normal col s8 m10 l10" placeholder="Bubble"
+                               ng-model="bubble.bubble" ng-change="$ctrl.update(bubble)">
+                        <div class="col m8 m10 l10">
+                            <select ng-options="cluster._id as cluster.cluster for cluster in $ctrl.clusters" ng-model="bubble.clusterId" ng-change="$ctrl.update(bubble)">
+                            </select>
+                            <label>Cluster</label>
+                        </div>
+                        <div class="s4 m2 l2 center-align">
+                            <button class="btn btn-large"
+                                    ng-click="$ctrl.remove(bubble)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </div>
+                    </div>
+            </li>
+        </ul>
+    </div>
+</div>

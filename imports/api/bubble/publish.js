@@ -3,10 +3,10 @@
  */
 import { Meteor } from 'meteor/meteor';
 
-import { QuestionsCharacteristics } from './collection';
+import { Bubble } from './collection';
 
 if (Meteor.isServer) {
-    Meteor.publish('questionsCharacteristics', function() {
+    Meteor.publish('bubble', function() {
         const selector = {
             // $or: [{
             //     // when logged in user is the owner
@@ -20,6 +20,6 @@ if (Meteor.isServer) {
             // }]
         };
 
-        return QuestionsCharacteristics.find(/*selector*/);
+        return Bubble.find(/*selector*/);
     });
 }

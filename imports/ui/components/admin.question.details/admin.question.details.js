@@ -2,8 +2,7 @@ import {Meteor} from 'meteor/meteor';
 
 import templateUrl from './admin.question.details.html';
 import noUiSlider from 'nouislider';
-import {Characteristics} from  '../../../api/characteristics/index.js';
-import {QuestionsCharacteristics} from '../../../api/questions-characteristcs/index.js';
+
 import {Questions} from '../../../api/questions/index.js';
 import {Template} from 'meteor/templating';
 

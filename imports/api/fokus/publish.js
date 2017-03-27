@@ -3,10 +3,10 @@
  */
 import { Meteor } from 'meteor/meteor';
 
-import { Categories } from './collection';
+import { Fokus } from './collection';
 
 if (Meteor.isServer) {
-    Meteor.publish('categories', function() {
+    Meteor.publish('fokus', function() {
         const selector = {
             // $or: [{
             //     // when logged in user is the owner
@@ -20,6 +20,6 @@ if (Meteor.isServer) {
             // }]
         };
 
-        return Categories.find(/*selector*/);
+        return Fokus.find(/*selector*/);
     });
 }

@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="section">
+        <div class="card">
+            <div class="card-content">
+                <h4>Erstellen</h4>
+                <form name="newCluster" ng-submit="newCluster.$valid && $ctrl.add({cluster: $ctrl.newCluster});">
+                    <div class="input-field row">
+                        <input class="input-normal col s8 m10 l10" placeholder="Cluster"
+                               ng-model="$ctrl.newCluster" ng-required="true">
+                        <div class="s4 m2 l2 center-align">
+                            <button class="btn btn-large" type="submit">
+                                <i class="material-icons">note_add</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>Cluster</h4></li>
+            <li class="collection-item" ng-repeat="cluster in $ctrl.clusters">
+
+                    <div class="input-field row">
+                        <input class="input-normal col s8 m10 l10" placeholder="Cluster"
+                               ng-model="cluster.cluster" ng-change="$ctrl.update(cluster)">
+                        <div class="s4 m2 l2 center-align">
+                            <button class="btn btn-large"
+                                    ng-click="$ctrl.remove(cluster)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </div>
+                    </div>
+            </li>
+        </ul>
+    </div>
+</div>
