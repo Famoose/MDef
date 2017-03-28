@@ -3,7 +3,7 @@ import {Meteor} from 'meteor/meteor';
 import templateUrl from './admin.users.html';
 
 import {Answers} from '../../../api/answer/index.js';
-import {Questions} from '../../../api/questions/index.js';
+import {Questions} from '../../../api/question/index.js';
 
 class AdminUsers {
     constructor($scope,$state,CategoryUser) {

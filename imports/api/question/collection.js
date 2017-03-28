@@ -1,13 +1,13 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-export const Questions = new Mongo.Collection('questions');
+export const Question = new Mongo.Collection('question');
 
-var QuestionsSchema = new SimpleSchema({
+var QuestionSchema = new SimpleSchema({
     question: {
         type: String,
         label: "Frage",
         min: 0,
-        max: 100
+        max: 1000
     },
     energietypId: {
         type: String,
@@ -27,9 +27,9 @@ var QuestionsSchema = new SimpleSchema({
 
 });
 
-Questions.attachSchema(QuestionsSchema);
+Question.attachSchema(QuestionSchema);
 
-Questions.allow({
+Question.allow({
     insert(userId, question) {
         return Roles.userIsInRole(userId, ["admin"], "default-group");
     },

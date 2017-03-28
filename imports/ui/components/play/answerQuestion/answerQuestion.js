@@ -3,7 +3,7 @@ import {Meteor} from 'meteor/meteor';
 import noUiSlider from "nouislider";
 import templateUrl from './answerQuestion.html';
 import {Game} from '../../../../api/game/index.js';
-import {Questions} from '../../../../api/questions/index.js';
+import {Questions} from '../../../../api/question/index.js';
 import {Answers} from '../../../../api/answer/index.js';
 
 class AnswerQuestion {

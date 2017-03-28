@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import '../imports/api/bubble/index';
 import '../imports/api/cluster/index';
 import '../imports/api/energietyp/index';
-import '../imports/api/questions/index';
+import '../imports/api/question/index';
 import '../imports/api/fokus/index';
 import '../imports/api/game/index.js';
 import '../imports/api/answer/index.js';

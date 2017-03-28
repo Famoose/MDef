@@ -41,7 +41,7 @@ class AdminBubble {
         Bubble.remove(bubble._id);
     }
     add(bubble) {
-        Bubble.insert(bubble);
+        Bubble.insert(bubble, this.onClusterReady());
         this.newBubble = null;
         this.newCluster = null;
     }

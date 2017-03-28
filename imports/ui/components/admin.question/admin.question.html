@@ -2,26 +2,34 @@
     <div class="section">
         <div class="card">
             <div class="card-content">
-                <div class="fixed-action-btn horizontal hide-on-large-only">
-                    <a class="btn-floating btn-large waves-effect waves-light dark-blue" ng-click="$ctrl.back()"><i class="material-icons">keyboard_return</i></a>
-                </div>
-                <a class="btn-floating btn-large waves-effect waves-light dark-blue right hide-on-med-and-down" ng-click="$ctrl.back()"><i class="material-icons">keyboard_return</i></a>
-
                 <h4>Erstellen</h4>
-                <form name="newQuestion" ng-submit="newQuestion.$valid && $ctrl.add({question: $ctrl.newQuestion,questionIndex:$ctrl.newQuestionIndex});">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input class="input-normal" placeholder="Frage" ng-model="$ctrl.newQuestion" ng-required="true">
+                <form name="newQuestion"
+                      ng-submit="newQuestion.$valid && $ctrl.add({question: $ctrl.newQuestion, fokusId:$ctrl.newFokus, energietypId:$ctrl.newEnergietyp, clusterId:$ctrl.newCluster});">
+                    <div class="input-field row">
+                        <input class="input-normal col s8 m10 l10" placeholder="Frage"
+                               ng-model="$ctrl.newQuestion" ng-required="true">
+                        <div class="input-normal input-field col m8 m10 l10">
+                            <select ng-options="cluster._id as cluster.cluster for cluster in $ctrl.clusters"
+                                    ng-model="$ctrl.newCluster" ng-required="true">
+                            </select>
+                            <label>Cluster</label>
                         </div>
-                        <div class="input-field row col s12">
-                            <input class="input-normal col s8 m10 l10" placeholder="Frageposition"
-                                   ng-model="$ctrl.newQuestionIndex"  ng-required="true">
-                            <div class="s4 m2 l2 center-align">
-                                <button class="btn btn-large"
-                                        type="submit">
-                                    <i class="material-icons">note_add</i>
-                                </button>
-                            </div>
+                        <div class="input-normal input-field col m8 m10 l10">
+                            <select ng-options="fokus._id as fokus.fokus for fokus in $ctrl.fokus"
+                                    ng-model="$ctrl.newFokus" ng-required="true">
+                            </select>
+                            <label>Fokus</label>
+                        </div>
+                        <div class="input-normal input-field col m8 m10 l10">
+                            <select ng-options="energietyp._id as energietyp.energietyp for energietyp in $ctrl.energietyps"
+                                    ng-model="$ctrl.newEnergietyp" ng-required="true">
+                            </select>
+                            <label>Energie Typ</label>
+                        </div>
+                        <div class="s4 m2 l2 center-align">
+                            <button class="btn btn-large" type="submit">
+                                <i class="material-icons">note_add</i>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -30,25 +38,35 @@
     </div>
     <div class="section">
         <ul class="collection with-header">
-            <li class="collection-header"><h4>Fragen</h4>
+            <li class="collection-header"><h4>Question</h4>
+                <div class="input-field">
+                    <i class="material-icons prefix">search</i>
+                    <label for="search">Search</label>
+                    <input class="input-normal" placeholder="Search" id="search" type="text"
+                           ng-model="search" ng-change="$ctrl.onClusterReady()">
+                </div>
             </li>
-            <li class="collection-item" ng-repeat="question in $ctrl.questions">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input placeholder="Frage" class="input-normal" ng-model="question.question"
-                               ng-blur="$ctrl.update(question)">
+            <li class="collection-item" ng-repeat="question in $ctrl.questions | filter: search">
+                <div class="input-field row">
+                    <input class="input-normal col s8 m10 l10" placeholder="Frage"
+                           ng-model="question.question" ng-required="true">
+                    <div class="input-normal input-field col m8 m10 l10">
+                        <select ng-options="cluster._id as cluster.cluster for cluster in $ctrl.clusters"
+                                ng-model="question.clusterId" ng-required="true">
+                        </select>
+                        <label>Cluster</label>
                     </div>
-                    <div class="input-field row col s12">
-                        <input placeholder="Frage-Position" class="input-normal col s4 m8 l9"
-                               ng-model="question.questionIndex" ng-blur="$ctrl.updateIndex(question)">
-                        <div class="s4 m2 l2 center-align">
-                            <button class="btn btn-large" ng-click="$ctrl.view(question)">
-                                <i class="material-icons">search</i>
-                            </button>
-                            <button class="btn btn-large" ng-click="$ctrl.remove(question)">
-                                <i class="material-icons">delete</i>
-                            </button>
-                        </div>
+                    <div class="input-normal input-field col m8 m10 l10">
+                        <select ng-options="fokus._id as fokus.fokus for fokus in $ctrl.fokus"
+                                ng-model="question.fokusId" ng-required="true">
+                        </select>
+                        <label>Fokus</label>
+                    </div>
+                    <div class="input-normal input-field col m8 m10 l10">
+                        <select ng-options="energietyp._id as energietyp.energietyp for energietyp in $ctrl.energietyps"
+                                ng-model="question.energietypId" ng-required="true">
+                        </select>
+                        <label>Energie Typ</label>
                     </div>
                 </div>
             </li>

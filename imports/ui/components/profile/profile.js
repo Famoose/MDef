@@ -1,6 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Answers} from '../../../api/answer/index.js';
-import {Questions} from '../../../api/questions/index.js';
+import {Questions} from '../../../api/question/index.js';
 
 import Chart from "chart.js";
 import templateUrl from './profile.html';

@@ -12,7 +12,6 @@ import register from '../imports/ui/components/register/register';
 import forgotpw from '../imports/ui/components/forgotpw/forgotpw';
 
 import adminQuestion from '../imports/ui/components/admin.question/admin.question';
-import adminQuestionDetails from '../imports/ui/components/admin.question.details/admin.question.details';
 import adminUsers from '../imports/ui/components/admin.users/admin.users.js';
 import adminEvaluation from '../imports/ui/components/admin.evaluation/admin.evaluation.js';
 
@@ -39,7 +38,6 @@ angular.module('pfinder', [
     register.name,
     forgotpw.name,
     adminQuestion.name,
-    adminQuestionDetails.name,
     adminUsers.name,
     adminEvaluation.name,
     adminBubble.name,

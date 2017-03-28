@@ -3,10 +3,10 @@
  */
 import { Meteor } from 'meteor/meteor';
 
-import { Questions } from './collection';
+import { Question } from './collection';
 
 if (Meteor.isServer) {
-    Meteor.publish('questions', function() {
+    Meteor.publish('question', function() {
         const selector = {
             // $or: [{
             //     // when logged in user is the owner
@@ -20,6 +20,6 @@ if (Meteor.isServer) {
             // }]
         };
 
-        return Questions.find(/*selector*/);
+        return Question.find(/*selector*/);
     });
 }

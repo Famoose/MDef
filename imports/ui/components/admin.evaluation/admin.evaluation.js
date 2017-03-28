@@ -2,7 +2,7 @@ import {Meteor} from 'meteor/meteor';
 
 import templateUrl from './admin.evaluation.html';
 import {Answers} from '../../../api/answer/index.js';
-import {Questions} from '../../../api/questions/index.js';
+import {Questions} from '../../../api/question/index.js';
 
 
 class AdminEvaluation {

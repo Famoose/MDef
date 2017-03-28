@@ -5,8 +5,8 @@
             <li>
                 <a ng-show="$ctrl.isLoggedIn">{{ $ctrl.currentUser.emails[0].address }}</a>
             </li>
-            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-category">Kategorie</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-users">Users</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-question">Fragen</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-cluster">Cluster</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-bubble">Bubble</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-fokus">Fokus</a></li>
@@ -22,8 +22,8 @@
             <li>
                 <a ng-show="$ctrl.isLoggedIn">{{ $ctrl.currentUser.emails[0].address }}</a>
             </li>
-            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-category">Kategorie</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-users">Users</a></li>
+            <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-question">Fragen</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-cluster">Cluster</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-bubble">Bubble</a></li>
             <li ng-show="$ctrl.hasRoleAdmin()"><a ui-sref="admin-fokus">Fokus</a></li>

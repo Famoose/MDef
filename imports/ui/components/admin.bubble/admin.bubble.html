@@ -8,7 +8,7 @@
                         <input class="input-normal col s8 m10 l10" placeholder="Bubble"
                                ng-model="$ctrl.newBubble" ng-required="true">
                         <div class="input-normal input-field col m8 m10 l10">
-                            <select ng-options="cluster._id as cluster.cluster for cluster in $ctrl.clusters" ng-model="$ctrl.newCluster">
+                            <select ng-options="cluster._id as cluster.cluster for cluster in $ctrl.clusters" ng-model="$ctrl.newCluster" ng-required="true">
                             </select>
                             <label>Cluster</label>
                         </div>
