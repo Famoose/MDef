@@ -20,9 +20,7 @@ import adminCluster from '../imports/ui/components/admin.cluster/admin.cluster.j
 import adminFokus from '../imports/ui/components/admin.fokus/admin.fokus.js';
 import adminEnergieTyp from '../imports/ui/components/admin.energietyp/admin.energietyp.js';
 
-import play from "../imports/ui/components/play/play.js";
-import playChooseCategory from "../imports/ui/components/play/chooseCategory/chooseCategory.js";
-import playAnswerQuestion from "../imports/ui/components/play/answerQuestion/answerQuestion.js";
+import answer from "../imports/ui/components/answer/answer.js";
 
 import select from "../imports/ui/components/directive/select.js";
 
@@ -44,9 +42,7 @@ angular.module('pfinder', [
     adminCluster.name,
     adminFokus.name,
     adminEnergieTyp.name,
-    play.name,
-    playChooseCategory.name,
-    playAnswerQuestion.name,
+    answer.name,
     impressum.name,
     select.name
 

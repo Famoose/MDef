@@ -22,7 +22,7 @@ class AdminQuestion {
             questions(){
                 return Question.find({},{
                     sort: {
-                        question: 1
+                        questionPosition: 1
                     }
                 })
             },
@@ -59,16 +59,40 @@ class AdminQuestion {
             "fokusId":question.fokusId,
             "clusterId":question.clusterId}}, this.onClusterReady());
     }
+    updatePosition(question)
+    {
+
+        Question.update({"_id":question._id},{$set:{"questionPosition":question.questionPosition}}, this.onClusterReady());
+        this.sort();
+    }
+
     remove(question) {
         Question.remove(question._id);
     }
     add(question) {
         Question.insert(question, this.onClusterReady());
+        this.sort();
         this.newFokus = null;
         this.newEnergietyp = null;
         this.newQuestion = null;
         this.newCluster = null;
+        this.newQuestionPosition = this.questions.length + 1;
     }
+    sort()
+    {
+        for(var i=0; i<this.questions.length; i++)
+        {
+            var tmpQuestion= this.questions[i];
+            tmpQuestion.questionPosition=i+1;
+            Question.update({"_id":tmpQuestion._id},{$set:{"questionPosition":tmpQuestion.questionPosition}});
+        }
+        function arrayMin(arr) {
+            return arr.reduce(function (p, v) {
+                return ( p.questionPosition < v.questionPosition ? p : v );
+            });
+        }
+    }
+
     onClusterReady(){
         self.$timeout(function () {
             $('select').material_select();

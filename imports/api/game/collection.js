@@ -11,11 +11,7 @@ var GameSchema = new SimpleSchema({
         type: String,
         label: "User Id"
     },
-    categoryId:{
-        type: String,
-        label: "Fragekataloge Id"
-    },
-    questionIndex:{
+    questionPosition:{
         type: Number,
         label: "Frageposition"
     }

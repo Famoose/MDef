@@ -4,23 +4,29 @@
             <div class="card-content">
                 <h4>Erstellen</h4>
                 <form name="newQuestion"
-                      ng-submit="newQuestion.$valid && $ctrl.add({question: $ctrl.newQuestion, fokusId:$ctrl.newFokus, energietypId:$ctrl.newEnergietyp, clusterId:$ctrl.newCluster});">
+                      ng-submit="newQuestion.$valid && $ctrl.add({question: $ctrl.newQuestion, fokusId:$ctrl.newFokus, energietypId:$ctrl.newEnergietyp, clusterId:$ctrl.newCluster, questionPosition:$ctrl.newQuestionPosition});">
                     <div class="input-field row">
                         <input class="input-normal col s8 m10 l10" placeholder="Frage"
                                ng-model="$ctrl.newQuestion" ng-required="true">
-                        <div class="input-normal input-field col m8 m10 l10">
+                        <div class="input-field col s4 m5 l5">
+                            <label for="frageNummer">Frage Nummer</label>
+                            <input class="input-normal" placeholder="" id="frageNummer" type="number"
+                               ng-model="$ctrl.newQuestionPosition" ng-required="true">
+                        </div>
+
+                        <div class="input-normal input-field col s4 m5 l5">
                             <select ng-options="cluster._id as cluster.cluster for cluster in $ctrl.clusters"
                                     ng-model="$ctrl.newCluster" ng-required="true">
                             </select>
                             <label>Cluster</label>
                         </div>
-                        <div class="input-normal input-field col m8 m10 l10">
+                        <div class="input-normal input-field col s4 m5 l5">
                             <select ng-options="fokus._id as fokus.fokus for fokus in $ctrl.fokus"
                                     ng-model="$ctrl.newFokus" ng-required="true">
                             </select>
                             <label>Fokus</label>
                         </div>
-                        <div class="input-normal input-field col m8 m10 l10">
+                        <div class="input-normal input-field col s4 m5 l5">
                             <select ng-options="energietyp._id as energietyp.energietyp for energietyp in $ctrl.energietyps"
                                     ng-model="$ctrl.newEnergietyp" ng-required="true">
                             </select>
@@ -49,24 +55,32 @@
             <li class="collection-item" ng-repeat="question in $ctrl.questions | filter: search">
                 <div class="input-field row">
                     <input class="input-normal col s8 m10 l10" placeholder="Frage"
-                           ng-model="question.question" ng-required="true">
-                    <div class="input-normal input-field col m8 m10 l10">
+                           ng-model="question.question" ng-required="true" ng-change="$ctrl.update(question)">
+                        <input class="input-normal col s4 m2 l2" placeholder="Position" id="{{question._id}}" type="number"
+                               ng-model="question.questionPosition" ng-required="true" ng-blur="$ctrl.updatePosition(question)">
+                    <div class="input-normal input-field col s8 m10 l10">
                         <select ng-options="cluster._id as cluster.cluster for cluster in $ctrl.clusters"
-                                ng-model="question.clusterId" ng-required="true">
+                                ng-model="question.clusterId" ng-required="true" ng-change="$ctrl.update(question)">
                         </select>
                         <label>Cluster</label>
                     </div>
-                    <div class="input-normal input-field col m8 m10 l10">
+                    <div class="input-normal input-field col s8 m10 l10">
                         <select ng-options="fokus._id as fokus.fokus for fokus in $ctrl.fokus"
-                                ng-model="question.fokusId" ng-required="true">
+                                ng-model="question.fokusId" ng-required="true" ng-change="$ctrl.update(question)">
                         </select>
                         <label>Fokus</label>
                     </div>
-                    <div class="input-normal input-field col m8 m10 l10">
+                    <div class="input-normal input-field col s8 m10 l10">
                         <select ng-options="energietyp._id as energietyp.energietyp for energietyp in $ctrl.energietyps"
-                                ng-model="question.energietypId" ng-required="true">
+                                ng-model="question.energietypId" ng-required="true" ng-change="$ctrl.update(question)">
                         </select>
                         <label>Energie Typ</label>
+                    </div>
+                    <div class="s4 m2 l2 center-align">
+                        <button class="btn btn-large"
+                                ng-click="$ctrl.remove(question)">
+                            <i class="material-icons">delete</i>
+                        </button>
                     </div>
                 </div>
             </li>

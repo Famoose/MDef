@@ -1,10 +1,10 @@
 import {Meteor} from 'meteor/meteor';
 
 import noUiSlider from "nouislider";
-import templateUrl from './answerQuestion.html';
-import {Game} from '../../../../api/game/index.js';
-import {Questions} from '../../../../api/question/index.js';
-import {Answers} from '../../../../api/answer/index.js';
+import templateUrl from './answer.html';
+import {Game} from '../../../api/game/index.js';
+import {Question} from '../../../api/question/index.js';
+import {Answers} from '../../../api/answer/index.js';
 
 class AnswerQuestion {
     constructor($scope,$state) {
@@ -12,26 +12,30 @@ class AnswerQuestion {
         var self=this;
 
         var gameSubHandler=Meteor.subscribe('game',init);
-        var questionSubHandler=Meteor.subscribe('questions',init);
+        var questionSubHandler=Meteor.subscribe('question',init);
         var answersSubHandler=Meteor.subscribe('answers',init);
 
         function init(){
             if(gameSubHandler.ready() && questionSubHandler.ready() && answersSubHandler.ready())
             {
                 var game=Game.findOne({'userId': Meteor.userId(), 'isPlaying': true});
-                var question =Questions.findOne({'categoryId':game.categoryId, 'questionIndex':game.questionIndex});
+                if(game === undefined){
+                    Game.insert({'userId':Meteor.userId(),'questionPosition': 1,'isPlaying':true})
+                    game=Game.findOne({'userId': Meteor.userId(), 'isPlaying': true});
+                }
+                var question =Question.findOne({'questionPosition':game.questionPosition});
 
                 self.initSlider(question.question,function (value)
                 {
-                    var sumOfQuestions=Questions.find({categoryId:game.categoryId}).fetch().length;
+                    var sumOfQuestions=Question.find().fetch().length;
                     Answers.insert({userId:Meteor.userId(),questionId: question._id,answer:parseInt(value)});
-                    if(game.questionIndex==sumOfQuestions)
+                    if(game.questionPosition==sumOfQuestions)
                     {
                         Game.update({_id:game._id},{$set:{isPlaying: false}});
-                        $state.go("profile",{catId:game.categoryId});
+                        $state.go("profile");
                     }
                     else {
-                        Game.update({_id:game._id},{$set:{questionIndex: game.questionIndex+1}});
+                        Game.update({_id:game._id},{$set:{questionPosition: game.questionPosition+1}});
                         init();
                     }
                 });
@@ -122,7 +126,7 @@ class AnswerQuestion {
         }
     }
 }
-const name = 'playAnswerQuestion';
+const name = 'answerQuestion';
 
 // create a module
 export default angular.module(name, [
@@ -137,7 +141,7 @@ function config($stateProvider) {
     $stateProvider
         .state('answer-question', {
             url: '/answer-question',
-            template: '<play-answer-question></play-answer-question>',
+            template: '<answer-question></answer-question>',
             resolve: {
                 error: ['$q', function currentUser($q) {
                     if (Meteor.userId() === null) {

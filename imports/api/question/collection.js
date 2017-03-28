@@ -23,6 +23,12 @@ var QuestionSchema = new SimpleSchema({
         type: String,
         label: "Cluster",
         min:0
+    },
+    questionPosition: {
+        type: Number,
+        label: "Frage Position",
+        min: 0,
+        max: 1000
     }
 
 });
