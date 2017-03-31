@@ -27,6 +27,7 @@ class AdminCluster {
         Cluster.insert(cluster);
         this.newCluster = null;
     }
+
 }
 const name = 'adminCluster';
 

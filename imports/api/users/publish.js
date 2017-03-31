@@ -9,7 +9,7 @@ if (Meteor.isServer) {
         return null;
     });
 
-    Meteor.publish('Meteor.users.test', function ()  {
+    Meteor.publish('Meteor.users.personal', function ()  {
         // Validate the arguments to be what we expect
 
 

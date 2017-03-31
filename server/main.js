@@ -6,11 +6,9 @@ import '../imports/api/question/index';
 import '../imports/api/fokus/index';
 import '../imports/api/game/index.js';
 import '../imports/api/answer/index.js';
+import '../imports/api/institut/index.js';
 import '../imports/api/users/index.js';
-import {Answers} from '../imports/api/answer/index.js';
-
-// import '../imports/api/questions/index.js';
-// import { Characteristics } from '../imports/api/characteristics/index.js';
+import '../imports/api/users/onCreateUser.js';
 
 Meteor.startup(() => {
     process.env.MAIL_URL = "smtp://personal.finder.app%40gmail.com:"+process.env.MAILPW+"@smtp.gmail.com";
@@ -21,10 +19,3 @@ Meteor.startup(() => {
         Roles.addUsersToRoles(id, ['admin'], 'default-group');
     }
 });
-
-if(Meteor.isServer){
-    Accounts.onCreateUser((options, user) => {
-        user.personal = options.personal;
-        return user;
-    });
-}

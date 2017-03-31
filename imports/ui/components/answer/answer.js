@@ -20,7 +20,7 @@ class AnswerQuestion {
             {
                 var game=Game.findOne({'userId': Meteor.userId(), 'isPlaying': true});
                 if(game === undefined){
-                    Game.insert({'userId':Meteor.userId(),'questionPosition': 1,'isPlaying':true})
+                    Game.insert({'userId':Meteor.userId(),'questionPosition': 1,'isPlaying':true});
                     game=Game.findOne({'userId': Meteor.userId(), 'isPlaying': true});
                 }
                 var question =Question.findOne({'questionPosition':game.questionPosition});

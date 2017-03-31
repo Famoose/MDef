@@ -50,14 +50,21 @@ class AdminQuestion {
         });
 
     }
+    undefinedToFalse(val) {
+        return (val !== undefined)
+    }
+
 
     update(question)
     {
+        question.subtract = this.undefinedToFalse(question.subtract);
         Question.update({"_id":question._id},{$set:{
             "question":question.question,
             "energietypId":question.energietypId,
             "fokusId":question.fokusId,
-            "clusterId":question.clusterId}}, this.onClusterReady());
+            "clusterId":question.clusterId,
+            "subtract": question.subtract
+    }}, this.onClusterReady());
     }
     updatePosition(question)
     {
@@ -70,6 +77,7 @@ class AdminQuestion {
         Question.remove(question._id);
     }
     add(question) {
+        question.subtract = this.undefinedToFalse(question.subtract);
         Question.insert(question, this.onClusterReady());
         this.sort();
         this.newFokus = null;
@@ -77,6 +85,7 @@ class AdminQuestion {
         this.newQuestion = null;
         this.newCluster = null;
         this.newQuestionPosition = this.questions.length + 1;
+        this.newSubtract = undefined;
     }
     sort()
     {

@@ -4,17 +4,20 @@
             <div class="card-content">
                 <h4>Erstellen</h4>
                 <form name="newQuestion"
-                      ng-submit="newQuestion.$valid && $ctrl.add({question: $ctrl.newQuestion, fokusId:$ctrl.newFokus, energietypId:$ctrl.newEnergietyp, clusterId:$ctrl.newCluster, questionPosition:$ctrl.newQuestionPosition});">
+                      ng-submit="newQuestion.$valid && $ctrl.add({question: $ctrl.newQuestion, fokusId:$ctrl.newFokus, energietypId:$ctrl.newEnergietyp, clusterId:$ctrl.newCluster, questionPosition:$ctrl.newQuestionPosition, subtract:$ctrl.newSubtract});">
                     <div class="input-field row">
                         <input class="input-normal col s8 m10 l10" placeholder="Frage"
                                ng-model="$ctrl.newQuestion" ng-required="true">
-                        <div class="input-field col s4 m5 l5">
+                        <div class="col s4 m2 l2">
+                            <input type="checkbox" id="sub" ng-model="$ctrl.newSubtract"/>
+                            <label for="sub"><i class="material-icons">invert_colors</i></label>
+                        </div>
+                        <div class="input-field col s6 m6 l6">
                             <label for="frageNummer">Frage Nummer</label>
                             <input class="input-normal" placeholder="" id="frageNummer" type="number"
                                ng-model="$ctrl.newQuestionPosition" ng-required="true">
                         </div>
-
-                        <div class="input-normal input-field col s4 m5 l5">
+                        <div class="input-normal input-field col s6 m6 l6">
                             <select ng-options="cluster._id as cluster.cluster for cluster in $ctrl.clusters"
                                     ng-model="$ctrl.newCluster" ng-required="true">
                             </select>
@@ -32,7 +35,7 @@
                             </select>
                             <label>Energie Typ</label>
                         </div>
-                        <div class="s4 m2 l2 center-align">
+                        <div class="col s4 m2 l2">
                             <button class="btn btn-large" type="submit">
                                 <i class="material-icons">note_add</i>
                             </button>
@@ -64,7 +67,11 @@
                         </select>
                         <label>Cluster</label>
                     </div>
-                    <div class="input-normal input-field col s8 m10 l10">
+                    <div class="col s4 m2 l2">
+                        <input type="checkbox" id="{{question._id}}sub" ng-required="true" ng-model="question.subtract" ng-click="$ctrl.update(question)"/>
+                        <label for="{{question._id}}sub"><i class="material-icons">invert_colors</i></label>
+                    </div>
+                    <div class="input-normal input-field col s12">
                         <select ng-options="fokus._id as fokus.fokus for fokus in $ctrl.fokus"
                                 ng-model="question.fokusId" ng-required="true" ng-change="$ctrl.update(question)">
                         </select>
@@ -76,7 +83,7 @@
                         </select>
                         <label>Energie Typ</label>
                     </div>
-                    <div class="s4 m2 l2 center-align">
+                    <div class="col s4 m2 l2 center-align">
                         <button class="btn btn-large"
                                 ng-click="$ctrl.remove(question)">
                             <i class="material-icons">delete</i>

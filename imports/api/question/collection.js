@@ -29,6 +29,10 @@ var QuestionSchema = new SimpleSchema({
         label: "Frage Position",
         min: 0,
         max: 1000
+    },
+    subtract:{
+        type: Boolean,
+        label: "Subtrahieren",
     }
 
 });
