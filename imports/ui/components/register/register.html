@@ -1,5 +1,5 @@
 <div class="container login-container row">
-    <form class="col offset-m3 m6 offset-s1 s10" name="register"
+    <form class="col offset-m3 m6 s12" name="register"
           novalidate>
         <div class="row">
             <div class="input-field col s12"><input placeholder="Email" ng-model="$ctrl.credentials.email"
@@ -16,16 +16,16 @@
             <div class="input-field col s12"><input placeholder="Password" ng-model="$ctrl.credentials.password"
                                                     class="input-login validate" type="password" ng-required="true">
             </div>
-            <div class="input-field col s12 m4">
-                <select class="input-login" ng-options="gender for gender in $ctrl.genders"
+            <div class="input-field col s6 m4">
+                <select ng-class="{'browser-default': $ctrl.isCordova, 'input-login': !$ctrl.isCordova}" ng-options="gender for gender in $ctrl.genders"
                         ng-model="$ctrl.credentials.personal.gender" ng-required="true">
                 </select>
-                <label>Geschlecht</label>
+                <label ng-hide="$ctrl.isCordova && $ctrl.credentials.personal.gender">Geschlecht</label>
             </div>
 
-            <div class="input-field col s12 m8">
-                <input type="checkbox" ng-model="$ctrl.credentials.personal.leader" id="leader"/>
-                <label for="leader" class="switch-title">Führungsverantwortung</label>
+            <div class="input-field col s6 m8">
+                <input type="checkbox" class="filled-in" ng-model="$ctrl.credentials.personal.leader" id="leader"/>
+                <label for="leader" class="switch-title">Leitung</label>
             </div>
             <div class="input-field col s12">
                 <input placeholder="Geburtstag" ng-model="$ctrl.credentials.personal.birth"
@@ -36,10 +36,10 @@
                                                     class="input-login validate" type="text" ng-required="true"></div>
 
             <div class="input-field col m8 m9 l9">
-                <select class="input-login" ng-options="institut._id as institut.institut for institut in $ctrl.instituts"
+                <select ng-class="{'browser-default': $ctrl.isCordova, 'input-login': !$ctrl.isCordova}"d ng-options="institut._id as institut.institut for institut in $ctrl.instituts"
                         ng-model="$ctrl.credentials.personal.institutId" ng-required="true">
                 </select>
-                <label>Institut</label>
+                <label ng-hide="$ctrl.isCordova && $ctrl.credentials.personal.gender">Institut</label>
             </div>
             <div class="col s4 m3 l3 center-align">
                 <a class="btn btn-large" href="#modal1">
@@ -56,12 +56,12 @@
     </form>
 </div>
 
-<!-- Modal Structure -->
+
 <div id="modal1" class="modal">
     <div class="modal-content">
-        <h4>Neues Institut/Gruppe</h4>
+        <h4>Neues Institut</h4>
         <div class="row">
-            <form class="col offset-m3 m6 offset-s1 s10" name="group"
+            <form class="col offset-m3 m6 s12" name="group"
                   novalidate>
                 <div class="input-field col s12"><input placeholder="Name" ng-model="$ctrl.institut.institut"
                                                         class="input-normal validate" type="text" ng-required="true">

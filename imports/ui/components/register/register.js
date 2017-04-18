@@ -10,17 +10,17 @@ class Register {
         $scope.viewModel(this);
         this.$state = $state;
         this.genders = ['Weiblich', 'Männlich'];
+        this.isCordova = Meteor.isCordova;
         this.credentials = {
             email: '',
             password: '',
             personal: {
                 firstname: '',
                 lastname: '',
-                institut: '',
+                institutId: '',
                 leader: '',
                 birth: '',
-                job: '',
-                institutId: ''
+                job: ''
             }
         };
         self.$timeout=$timeout;

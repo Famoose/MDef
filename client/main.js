@@ -24,8 +24,6 @@ import answer from "../imports/ui/components/answer/answer.js";
 
 import select from "../imports/ui/components/directive/select.js";
 
-import {CategoryUser} from "../imports/service/CategoryUser.js";
-
 angular.module('pfinder', [
     angularMeteor,
     uiRouter,
@@ -46,9 +44,7 @@ angular.module('pfinder', [
     impressum.name,
     select.name
 
-]).service("CategoryUser",CategoryUser)
-    .config(['$locationProvider', '$urlRouterProvider',config]).run(['$rootScope', '$state',run]);
-
+])
 function onReady() {
     angular.bootstrap(document, [
         'pfinder'
@@ -59,8 +55,10 @@ function onReady() {
 
 if (Meteor.isCordova) {
     angular.element(document).on('deviceready', onReady);
+    document.isCordova = true;
 } else {
     angular.element(document).ready(onReady);
+    document.isCordova = false;
 }
 
 function config($locationProvider, $urlRouterProvider) {

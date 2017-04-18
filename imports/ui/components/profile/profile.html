@@ -1,30 +1,43 @@
 <div class="container">
     <div class="card">
-        <div class="row">
-            <div class="col m4 s12">
-                <div class="collection" style="margin: 0;">
-                    <a class="collection-item collection-normal"
-                       ng-repeat="category in $ctrl.categories" ng-class="{'active':$ctrl.isActive(category)}" ng-click="$ctrl.setCategory(category)" style="cursor: pointer">{{category.category}}</a>
-                </div>
+        <div class="card-content">
+            <h2>User</h2>
+            <p>{{$ctrl.currentUser}}</p>
+            <h3>Gruppe</h3>
+            <p>{{$ctrl.group}}</p>
+            <div class="chart-container">
             </div>
-            <div class="col m8 s12">
-                <div class="card-content">
-                    <div class="chart-container">
-                        <canvas id="chart" width="400" height="400"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="card-content">
-                    <h4>Beschreibung</h4>
-                    <ul class="collapsible" data-collapsible="accordion" style="margin:0">
-                        <li ng-repeat="characteristic in $ctrl.characteristics">
-                            <div class="collapsible-header"><i class="material-icons">person_pin</i>{{characteristic.characteristic}}</div>
-                            <div class="collapsible-body white-text" style="background-color:#333;"><p>{{characteristic.description}}</p></div>
+            <ul>
+                <li>
+                    <h4>Answers</h4>
+                    <ul>
+                        <li ng-repeat="answer in $ctrl.answers">
+                            <p>{{answer}}</p>
                         </li>
                     </ul>
-                </div>
-            </div>
+                </li>
+                <li>
+                    <h4>Clusters</h4>
+                    {{$ctrl.clusters}}
+                </li>
+                <li>
+                    <h4>Bubbles</h4>
+                    {{$ctrl.bubbles}}
+                </li>
+                <li>
+                    <h4>Energietyp</h4>
+                    {{$ctrl.energietyp}}
+                </li>
+                <li>
+                    <h4>Fokus</h4>
+                    {{$ctrl.fokus}}
+                </li>
+                <li>
+                    <h4>Questions</h4>
+                    {{$ctrl.questions}}
+                </li>
+            </ul>
         </div>
+
     </div>
 </div>

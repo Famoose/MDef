@@ -1,12 +1,6 @@
-
-@font-face {
-    font-family: myfont;
-    src: url(fonts/HomeRem.ttf);
-}
-
 nav ul a,
 nav .brand-logo {
-    color: white;
+    color: #3f3f3f;
 }
 
 p {
@@ -14,7 +8,7 @@ p {
 }
 
 .button-collapse {
-    color: white;
+    color: #3f3f3f;
 }
 
 .icon-block {
@@ -35,7 +29,7 @@ main {
 }
 
 nav{
-    background-color: #333;
+    background-color: #e1eaff;
 }
 .login-container{
     margin-top: 5%;
@@ -49,22 +43,24 @@ nav{
     font-size: 1.5em;
 }
 .btn-large{
-    background-color: #333333;
+    background-color: #c9e9bd;
     font-weight: bold;
-    color: white;
+    color: #3f3f3f;
 }
 .btn-login{
     font-size:1.5em;
 }
 .btn-large:hover{
-    background-color: #888;
+    background-color: #009528;
+    color: white;
 }
 .btn-large:focus{
-    background-color: #333333 !important;
+    background-color: #009528 !important;
+    color: white
 }
 .btn-flat-custom{
     font-weight: bold;
-    color: white;
+    color: #3f3f3f;
     font-size: 1.5em;
     text-align: center;
 }
@@ -76,7 +72,7 @@ nav{
     font-size: 1.5em !important;
 }
 .dark-blue{
-    background-color: #1e5293 !important;
+    background-color: #001749 !important;
 }
 .input-login:focus{
     border-bottom: 1px solid white !important;
@@ -85,21 +81,18 @@ nav{
     box-shadow: 0 1px 0 0 white !important;
 }
 .input-normal{
-    color: #333 !important;
+    color: #001749 !important;
 }
 .logo{
     height: 60px;
     padding-top: 4px;
 }
-.logo-text{
-    font-family: myfont;
-    font-size: 2.8em !important;
-}
+
 .input-normal:focus{
-    border-bottom: 1px solid #333 !important;
-    -webkit-box-shadow: 0 1px 0 0 #333 !important;
-    -moz-box-shadow: 0 1px 0 0 #333 !important;
-    box-shadow: 0 1px 0 0 #333 !important;
+    border-bottom: 1px solid #001749 !important;
+    -webkit-box-shadow: 0 1px 0 0 #001749 !important;
+    -moz-box-shadow: 0 1px 0 0 #001749 !important;
+    box-shadow: 0 1px 0 0 #001749 !important;
 }
 
 #slider {
@@ -109,10 +102,10 @@ nav{
 }
 
 .collection-normal{
-    color: #333333 !important;
+    color: #001749 !important;
 }
 .collection-normal:active, .collection .collection-item.active{
-    background-color: #333333 !important;
+    background-color: #001749 !important;
     color: white !important;
 
 }
@@ -134,7 +127,7 @@ nav{
     width:100%!important;
 }
 .noUi-base {
-    background-color: #333;
+    background-color: #001749;
 }
 .arrow-up
 {

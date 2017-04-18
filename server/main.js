@@ -9,6 +9,7 @@ import '../imports/api/answer/index.js';
 import '../imports/api/institut/index.js';
 import '../imports/api/users/index.js';
 import '../imports/api/users/onCreateUser.js';
+import '../imports/service/AnswerAttr';
 
 Meteor.startup(() => {
     process.env.MAIL_URL = "smtp://personal.finder.app%40gmail.com:"+process.env.MAILPW+"@smtp.gmail.com";
