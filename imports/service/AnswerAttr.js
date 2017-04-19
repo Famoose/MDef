@@ -42,7 +42,23 @@ Meteor.methods({
                     as: "energietyp"
                 }
             },
-            {$match: {"answers.userId": user}}
+            {$project: {
+                question: 1,
+                answers: {
+                    $filter: {
+                        input: "$answers",
+                        as: "answer",
+                        cond: { $eq: [ "$$answer.userId", user ] }
+                    }
+                },
+                fokus: 1,
+                bubble: 1,
+                cluster: 1,
+                energietyp: 1,
+                subtract: 1,
+                questionPosition: 1,
+
+            }}
 
         ]);
     }
