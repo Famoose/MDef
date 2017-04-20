@@ -5,38 +5,9 @@
             <p>{{$ctrl.currentUser}}</p>
             <h3>Gruppe</h3>
             <p>{{$ctrl.group}}</p>
-            <div class="chart-container">
+            <div id="chart-container" ng-init="$ctrl.generateChart()">
+
             </div>
-            <ul>
-                <li>
-                    <h4>Answers</h4>
-                    <ul>
-                        <li ng-repeat="answer in $ctrl.answers">
-                            <p>{{answer}}</p>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <h4>Clusters</h4>
-                    {{$ctrl.clusters}}
-                </li>
-                <li>
-                    <h4>Bubbles</h4>
-                    {{$ctrl.bubbles}}
-                </li>
-                <li>
-                    <h4>Energietyp</h4>
-                    {{$ctrl.energietyp}}
-                </li>
-                <li>
-                    <h4>Fokus</h4>
-                    {{$ctrl.fokus}}
-                </li>
-                <li>
-                    <h4>Questions</h4>
-                    {{$ctrl.questions}}
-                </li>
-            </ul>
         </div>
 
     </div>
