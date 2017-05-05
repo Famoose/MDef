@@ -22,7 +22,7 @@ import adminEnergieTyp from '../imports/ui/components/admin.energietyp/admin.ene
 
 import answer from "../imports/ui/components/answer/answer.js";
 
-import select from "../imports/ui/components/directive/select.js";
+import angularchart from 'angular-chart.js';
 
 angular.module('pfinder', [
     angularMeteor,
@@ -41,10 +41,9 @@ angular.module('pfinder', [
     adminFokus.name,
     adminEnergieTyp.name,
     answer.name,
-    impressum.name,
-    select.name
+    impressum.name, 'chart.js'
 
-])
+]);
 function onReady() {
     angular.bootstrap(document, [
         'pfinder'

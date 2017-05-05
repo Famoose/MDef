@@ -8,26 +8,39 @@ import {Cluster} from '../../../api/cluster/index.js';
 import {Bubble} from '../../../api/bubble/index.js';
 import {Question} from '../../../api/question/index.js';
 
-import Highcharts from 'highcharts';
-import 'highcharts/modules/exporting';
-
 import templateUrl from './profile.html';
 
 class Profile {
-    constructor($scope, $state) {
+    constructor($scope, $state, $timeout) {
         $scope.viewModel(this);
+        self = this;
         this.$state = $state;
         Meteor.subscribe('userWithGroup');
-        Meteor.subscribe('answerWithQuestion');
-        Meteor.subscribe('questionWithForeign');
-        var self = this;
+        Meteor.subscribe('answers');
+        Meteor.subscribe('fokus');
+        var handlerEnergietyp = Meteor.subscribe('energietyp', calcAnswersCheck);
+        Meteor.subscribe('cluster');
+        Meteor.subscribe('bubble', this.onClusterReady);
+        self.$timeout = $timeout;
+
         Meteor.call('answer.getAll', (err, res) => {
             if (err) {
                 alert(err);
             } else {
-                this.res = res;
+                self.answerAll = res;
+                self.resAnswer = res;
+                calcAnswersCheck();
             }
         });
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
+        function calcAnswersCheck() {
+            if (handlerEnergietyp.ready() && self.answerAll !== undefined) {
+                self.calcAnswers()
+            }
+        }
+
         this.helpers({
             currentUser() {
                 return Meteor.user();
@@ -41,10 +54,10 @@ class Profile {
             clusters(){
                 return Cluster.find();
             },
-            bubbles(){
+            bubble(){
                 return Bubble.find();
             },
-            energietyp(){
+            energietyps(){
                 return Energietyp.find();
             },
             fokus(){
@@ -56,8 +69,24 @@ class Profile {
         });
     }
 
-    getQuestion(questionId){
-        Meteor.call('question.get',{questionId}, (err, res) => {
+    filter(settings) {
+        var resAnswer = self.answerAll;
+        if (this.newFokus !== undefined) {
+            resAnswer = resAnswer.filter(function (elm) {
+                return elm.fokus[0]._id === settings.newFokus
+            })
+        }
+        if (this.newCluster !== undefined) {
+            resAnswer = resAnswer.filter(function (elm) {
+                return elm.cluster[0]._id === settings.newCluster
+            })
+        }
+        self.resAnswer = resAnswer;
+        self.calcAnswers()
+    }
+
+    getQuestion(questionId) {
+        Meteor.call('question.get', {questionId}, (err, res) => {
             if (err) {
                 alert(err);
             } else {
@@ -66,99 +95,43 @@ class Profile {
         })
     }
 
-    generateChart(){
-        var chart = Highcharts.chart('chart-container', {
-
-            chart: {
-                type: 'column'
-            },
-
-            title: {
-                text: 'Highcharts responsive chart'
-            },
-
-            subtitle: {
-                text: 'Resize the frame or click buttons to change appearance'
-            },
-
-            legend: {
-                align: 'right',
-                verticalAlign: 'middle',
-                layout: 'vertical'
-            },
-
-            xAxis: {
-                categories: ['Apples', 'Oranges', 'Bananas'],
-                labels: {
-                    x: -10
+    calcAnswers() {
+        var energietyps = Energietyp.find().fetch();
+        self.dataField = [];
+        var countsField = [];
+        var categoriesField = [];
+        for (i = 0; i < energietyps.length; i++) {
+            self.dataField[i] = 0;
+            countsField[i] = 0;
+            categoriesField[i] = energietyps[i].energietyp;
+            self.resAnswer.forEach(function (question) {
+                if (energietyps[i]._id === question.energietyp[0]._id) {
+                    question.answers.forEach(function (answer) {
+                        self.dataField[i] = answer.answer + self.dataField[i];
+                        countsField[i] += 1;
+                    });
                 }
-            },
+            });
+            self.dataField[i] = self.dataField[i]/countsField[i];
+        }
+        self.categoriesField = categoriesField;
+        console.log(self.dataField);
+        this.onClusterReady();
+    }
 
-            yAxis: {
-                allowDecimals: false,
-                title: {
-                    text: 'Amount'
-                }
-            },
-
-            series: [{
-                name: 'Christmas Eve',
-                data: [1, 4, 3]
-            }, {
-                name: 'Christmas Day before dinner',
-                data: [6, 4, 2]
-            }, {
-                name: 'Christmas Day after dinner',
-                data: [8, 4, 3]
-            }],
-
-            responsive: {
-                rules: [{
-                    condition: {
-                        maxWidth: 500
-                    },
-                    chartOptions: {
-                        legend: {
-                            align: 'center',
-                            verticalAlign: 'bottom',
-                            layout: 'horizontal'
-                        },
-                        yAxis: {
-                            labels: {
-                                align: 'left',
-                                x: 0,
-                                y: -5
-                            },
-                            title: {
-                                text: null
-                            }
-                        },
-                        subtitle: {
-                            text: null
-                        },
-                        credits: {
-                            enabled: false
-                        }
-                    }
-                }]
-            }
-        });
-
-        $('#small').click(function () {
-            chart.setSize(400, 300);
-        });
-
-        $('#large').click(function () {
-            chart.setSize(600, 300);
+    onClusterReady() {
+        self.$timeout(function () {
+            $('select').material_select();
         });
     }
+
 }
 const name = 'profile';
 // create a module
 export default angular.module(name, [])
     .component(name, {
         templateUrl,
-        controller: ['$scope', '$state', Profile]
+        controller: ['$scope', '$state', '$timeout', Profile]
     })
     .config(['$stateProvider', config]);
 

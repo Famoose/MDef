@@ -3,109 +3,116 @@ import {Meteor} from 'meteor/meteor';
 import templateUrl from './admin.users.html';
 
 import {Answers} from '../../../api/answer/index.js';
-import {Questions} from '../../../api/question/index.js';
+import {Institut} from '../../../api/institut/index.js';
+import {Energietyp} from '../../../api/energietyp/index.js';
+import {Fokus} from '../../../api/fokus/index.js';
+import {Cluster} from '../../../api/cluster/index.js';
+import {Bubble} from '../../../api/bubble/index.js';
+import {Question} from '../../../api/question/index.js';
 
 class AdminUsers {
-    constructor($scope,$state,CategoryUser) {
+    constructor($scope,$state,$timeout) {
         $scope.viewModel(this);
-
+        self = this;
+        self.$timeout = $timeout;
+        Meteor.subscribe('institut');
+        Meteor.subscribe('answers');
+        Meteor.subscribe('fokus');
+        Meteor.subscribe('energietyp');
+        Meteor.subscribe('cluster');
+        Meteor.subscribe('bubble', self.onClusterReady());
         this.$state = $state;
-        this.CategoryUser=CategoryUser;
-
         this.helpers({
-            characteristics() {
-                return Characteristics.find({}, {
-                    sort: {
-                        characteristic: 1
-                    }
-                });
+            currentUser() {
+                return Meteor.user();
             },
-            categories() {
-                return Categories.find({}, {
-                    sort: {
-                        category: 1
-                    }
-                });
+            group(){
+                return Institut.find();
             },
-            users(){
-                return Meteor.users.find({}, {fields: {emails: 1, profile: 1}})
+            answers(){
+                return Answers.find();
+            },
+            clusters(){
+                return Cluster.find();
+            },
+            bubble(){
+                return Bubble.find();
+            },
+            energietyps(){
+                return Energietyp.find();
+            },
+            fokus(){
+                return Fokus.find();
+            },
+            questions(){
+                return Question.find();
+            },
+            institut(){
+                return Institut.find();
             }
         });
-
-        var self=this;
-
-        self.colors=["#333","#1e5293","red","blue","yellow"];
-
-        self.categoriesHandler=Meteor.subscribe('categories',generate);
-        self.usersHandler=Meteor.subscribe('users',generate);
-        self.characteristicsHandler=Meteor.subscribe('characteristics',generate);
-        self.answersSubHandler=Meteor.subscribe('answers',generate);
-        self.questionsSubHandler=Meteor.subscribe('questions',generate);
-        self.questionsCharacteristicsSubHandler=Meteor.subscribe('questionsCharacteristics',generate);
-
-        function generate()
-        {
-            if(self.categoriesHandler.ready() && self.usersHandler.ready() && self.characteristicsHandler.ready()
-                && self.answersSubHandler.ready() && self.questionsSubHandler.ready() && self.questionsCharacteristicsSubHandler.ready())
-            {
-                var categories=self.categories;
-                var characteristics=self.characteristics;
-                var users= self.users;
-
-                var labels=[];
-                var data = {
-                    labels: labels,
-                    datasets: []
-                };
-                for (var i = 0; i < categories.length; i++) {
-                    var category = categories[i];
-                    var chartData = [];
-                    var dataset = {};
-                    var dataHolder = self.CategoryUser.generateDataholder();
-                    dataset.label = category.category;
-                    for (var j = 0; j < characteristics.length; j++) {
-                        if (labels.length != characteristics.length) {
-                            labels.push(characteristics[j].characteristic);
-                        }
-                        for (var n = 0; n < users.length; n++) {
-                            var user = users[n];
-                            self.CategoryUser.get(category, user._id, dataHolder);
-                        }
-                        if(dataHolder[characteristics[j]._id].factor == 0 && dataHolder[characteristics[j]._id].value ==0)
-                        {
-                            chartData.push(0);
-                        }
-                        else
-                        {
-                            chartData.push((dataHolder[characteristics[j]._id].value / dataHolder[characteristics[j]._id].factor).toFixed(2));
-                        }
-                    }
-                    dataset.data = chartData;
-                    dataset.borderWidth = 1;
-                    dataset.backgroundColor = self.colors[i];
-                    data.datasets.push(dataset);
-                }
-                new Chart($("#chart-average"), {
-                    type: 'bar',
-                    data: data,
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true,
-                                    suggestedMax: 10,
-                                    suggestedMin: 0,
-                                    stepSize: 1
-                                }
-                            }]
-                        }
-                    },
-                });
-            }
-        }
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
     }
-    view(user){
-        this.$state.go("admin-evaluation",{uid: user._id});
+
+    filter(settings) {
+        var resAnswer = self.answerAll;
+        if (this.newFokus !== undefined) {
+            resAnswer = resAnswer.filter(function (elm) {
+                return elm.fokus[0]._id === settings.newFokus
+            })
+        }
+        if (this.newCluster !== undefined) {
+            resAnswer = resAnswer.filter(function (elm) {
+                return elm.cluster[0]._id === settings.newCluster
+            })
+        }
+        self.resAnswer = resAnswer;
+        self.calcAnswers()
+    }
+
+    getInstitut(institutId) {
+        Meteor.call('answer.getInstitut', {institutId}, (err, res) => {
+            if (err) {
+                alert(err);
+            } else {
+                console.log(res);
+                self.answerAll = res;
+                self.resAnswer = res;
+                self.calcAnswers();
+            }
+        })
+    }
+
+    calcAnswers() {
+        var energietyps = Energietyp.find().fetch();
+        self.dataField = [];
+        var countsField = [];
+        var categoriesField = [];
+        for (i = 0; i < energietyps.length; i++) {
+            self.dataField[i] = 0;
+            countsField[i] = 0;
+            categoriesField[i] = energietyps[i].energietyp;
+            self.resAnswer.forEach(function (question) {
+                if (energietyps[i]._id === question.energietyp[0]._id) {
+                    question.answers.forEach(function (answer) {
+                        self.dataField[i] = answer.answer + self.dataField[i];
+                        countsField[i] += 1;
+                    });
+                }
+            });
+            self.dataField[i] = self.dataField[i]/countsField[i];
+        }
+        self.categoriesField = categoriesField;
+        console.log(self.dataField);
+        self.onClusterReady();
+    }
+
+    onClusterReady() {
+        self.$timeout(function () {
+            $('select').material_select();
+        });
     }
 }
 const name = 'adminUsers';
@@ -115,7 +122,7 @@ export default angular.module(name, [
 ])
     .component(name, {
         templateUrl,
-        controller: ['$scope','$state','CategoryUser', AdminUsers]
+        controller: ['$scope','$state','$timeout', AdminUsers]
     })
     .config(['$stateProvider', config]);
 

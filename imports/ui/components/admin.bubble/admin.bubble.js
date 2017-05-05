@@ -37,6 +37,7 @@ class AdminBubble {
     {
         Bubble.update({"_id":bubble._id},{$set:{"bubble":bubble.bubble, "clusterId":bubble.clusterId}}, this.onClusterReady());
     }
+
     remove(bubble) {
         Bubble.remove(bubble._id);
     }

@@ -5,19 +5,21 @@ import templateUrl from './answer.html';
 import {Game} from '../../../api/game/index.js';
 import {Question} from '../../../api/question/index.js';
 import {Answers} from '../../../api/answer/index.js';
+import {Institut} from '../../../api/institut/index.js';
 
 class AnswerQuestion {
     constructor($scope,$state) {
         $scope.viewModel(this);
         var self=this;
-
+        var instSubHandler= Meteor.subscribe('userWithGroup',init);
         var gameSubHandler=Meteor.subscribe('game',init);
         var questionSubHandler=Meteor.subscribe('question',init);
         var answersSubHandler=Meteor.subscribe('answers',init);
 
         function init(){
-            if(gameSubHandler.ready() && questionSubHandler.ready() && answersSubHandler.ready())
+            if(gameSubHandler.ready() && questionSubHandler.ready() && answersSubHandler.ready() && instSubHandler.ready())
             {
+                var instId = Institut.find().fetch()[0]._id;
                 var game=Game.findOne({'userId': Meteor.userId(), 'isPlaying': true});
                 if(game === undefined){
                     Game.insert({'userId':Meteor.userId(),'questionPosition': 1,'isPlaying':true});
@@ -28,7 +30,11 @@ class AnswerQuestion {
                 self.initSlider(question.question,function (value)
                 {
                     var sumOfQuestions=Question.find().fetch().length;
-                    Answers.insert({userId:Meteor.userId(),questionId: question._id,answer:parseInt(value)});
+                    if(question.subtract == true){
+                        Answers.insert({userId:Meteor.userId(),questionId: question._id,answer:parseInt(10-value), institutId: instId});
+                    }else{
+                        Answers.insert({userId:Meteor.userId(),questionId: question._id,answer:parseInt(value), institutId: instId});
+                    }
                     if(game.questionPosition==sumOfQuestions)
                     {
                         Game.update({_id:game._id},{$set:{isPlaying: false}});

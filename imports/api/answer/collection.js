@@ -16,6 +16,10 @@ var AnswersSchema = new SimpleSchema({
             label: "Antwort",
             min: 0,
             max: 10
+        },
+        institutId: {
+            type: String,
+            label: "Institut Id"
         }
     });
 

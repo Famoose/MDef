@@ -51,6 +51,9 @@ class AdminQuestion {
 
     }
     undefinedToFalse(val) {
+        if(val === false){
+            return false
+        }
         return (val !== undefined)
     }
 

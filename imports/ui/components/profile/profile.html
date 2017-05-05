@@ -1,13 +1,33 @@
 <div class="container">
     <div class="card">
         <div class="card-content">
-            <h2>User</h2>
-            <p>{{$ctrl.currentUser}}</p>
-            <h3>Gruppe</h3>
-            <p>{{$ctrl.group}}</p>
-            <div id="chart-container" ng-init="$ctrl.generateChart()">
+            <h2>Auswertung</h2>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>Filter</div>
+                    <div class="collapsible-body">
+                        <div class="input-normal input-field col s4 m5 l5">
+                            <select ng-options="fokus._id as fokus.fokus for fokus in $ctrl.fokus"
+                                    ng-model="$ctrl.newFokus" ng-required="true" ng-change="$ctrl.filter({newFokus: $ctrl.newFokus, newCluster: $ctrl.newCluster})">
+                                <option value="">Alle</option>
+                            </select>
+                            <label>Fokus</label>
+                        </div>
+                        <div class="input-normal input-field col s6 m6 l6">
+                            <select ng-options="cluster._id as cluster.cluster for cluster in $ctrl.clusters"
+                                    ng-model="$ctrl.newCluster" ng-required="true" ng-change="$ctrl.filter({newFokus: $ctrl.newFokus, newCluster: $ctrl.newCluster})">
+                                <option value="">Alle</option>
+                            </select>
+                            <label>Cluster</label>
+                        </div>
+                    </div>
 
-            </div>
+                </li>
+            </ul>
+            <canvas id="polar-area" class="chart chart-polar-area"
+                    chart-data="$ctrl.dataField" chart-labels="$ctrl.categoriesField">
+            </canvas>
+
         </div>
 
     </div>
