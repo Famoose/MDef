@@ -5,7 +5,7 @@ import '../../../../public/js/backstretch';
 
 
 class Nav {
-    constructor($scope, $state) {
+    constructor($scope, $state, $rootScope) {
         $scope.viewModel(this);
         this.$state = $state;
         (function ($) {
@@ -26,6 +26,10 @@ class Nav {
             }
 
         });
+        $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
+            $('.side-nav').sideNav('hide');
+        });
+
     }
 
     logout() {
@@ -48,5 +52,5 @@ const name = 'navigation';
 export default angular.module(name, [])
     .component(name, {
         templateUrl,
-        controller: ['$scope', '$state', Nav]
+        controller: ['$scope', '$state', '$rootScope', Nav]
     });
